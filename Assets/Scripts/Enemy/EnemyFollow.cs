@@ -27,7 +27,7 @@ public class EnemyFollow : MonoBehaviour
   void OnCollisionEnter2D(Collision2D collision)
   {
     //プレイヤーとぶつかったら
-    if (collision.gameObject.CompareTag("Player"))
+    if (collision.gameObject.CompareTag("Player") && false)
     {
       Debug.Log("Game Over!");
       isGameOver = true;

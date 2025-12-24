@@ -1,39 +1,39 @@
 public class BuffStatus
 {
     //属性
-    public float addAttack {get; private set;}
-    public float multipleAttack {get; private set;}
-    public float addSpeed {get; private set;}
-    public float multipleSpeed {get; private set;}
+    public float AddAttack {get; private set;}
+    public float MultipleAttack {get; private set;}
+    public float AddSpeed {get; private set;}
+    public float MultipleSpeed {get; private set;}
 
     //属性変更のためのメソッド
     public void SetAddAttack(float value)
     {
-        addAttack = value;
+        AddAttack = value;
     }
 
     public void SetMultipleAttack(float value)
     {
-        multipleAttack = value;
+        MultipleAttack = value;
     }
 
     public void SetAddSpeed(float value)
     {
-        addSpeed = value;
+        AddSpeed = value;
     }
 
     public void SetMultipleSpeed(float value)
     {
-        multipleSpeed = value;
+        MultipleSpeed = value;
     }
 
     //コンストラクタ
     public BuffStatus(BuffStatusSO buffStatusSO)
     {
-        addAttack = buffStatusSO.addAttack;
-        multipleAttack = buffStatusSO.multipleAttack;
-        addSpeed =buffStatusSO.addSpeed;
-        multipleSpeed = buffStatusSO.multipleSpeed;
+        AddAttack = buffStatusSO.AddAttack;
+        MultipleAttack = buffStatusSO.MultipleAttack;
+        AddSpeed =buffStatusSO.AddSpeed;
+        MultipleSpeed = buffStatusSO.MultipleSpeed;
     }
 }
 //★BuffStatusは値の管理と、値の再セットだけ行う

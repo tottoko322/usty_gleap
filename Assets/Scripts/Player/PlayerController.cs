@@ -9,9 +9,12 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
   //追加
   private Vector2 moveInput;
   private PlayerInputActions inputActions;
+  //ノックバック用の機能クラス
+  private Knockback knockback;
 
   void Awake()
   {
+    knockback = GetComponent<Knockback>();
     inputActions = new PlayerInputActions();
     inputActions.Player.AddCallbacks(this);
   }
@@ -47,5 +50,12 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
     transform.position += movement * speed * Time.deltaTime;
 
   }
-    
+
+    [System.Obsolete]
+    void OnCollisionEnter2D(Collision2D other)
+  {
+    Debug.Log("ぶつかりました！");
+    GameObject otherGameObject = other.gameObject;
+    knockback.DoKnockback(otherGameObject);
+  }
 }

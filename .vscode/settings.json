@@ -66,5 +66,8 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "usty_gleap.sln"
+    "dotnet.defaultSolution": "usty_gleap.sln",
+    "cSpell.words": [
+        "knockbacker"
+    ]
 }

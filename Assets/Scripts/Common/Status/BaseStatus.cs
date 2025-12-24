@@ -1,40 +1,39 @@
 public class BaseStatus
 {
     //属性
-    public float currentHP {get; private set;}
-    public float baseAttack {get; private set;}
-    public float baseSpeed {get; private set;}
-
-    public float baseDefense {get; private set;}
+    public float CurrentHP {get; private set;}
+    public float BaseAttack {get; private set;}
+    public float BaseSpeed {get; private set;}
+    public float BaseDefense {get; private set;}
 
     //セットメソッド
     public void SetCurrentHP(float value)
     {
-        currentHP = value;
+        CurrentHP = value;
     }
 
     public void SetBaseAttack(float value)
     {
-        baseAttack = value;
+        BaseAttack = value;
     }
 
     public void SetBaseSpeed(float value)
     {
-        baseSpeed = value;
+        BaseSpeed = value;
     }
 
     public void SetBaseDefense(float value)
     {
-        baseDefense = value;
+        BaseDefense = value;
     }
 
     //コンストラクタ
-    public BaseStatus(BaseStatusSO baseStatusSO)
+    public  BaseStatus(BaseStatusSO baseStatusSO)
     {
-        currentHP = baseStatusSO.maxHP;
-        baseAttack = baseStatusSO.baseAttack;
-        baseSpeed = baseStatusSO.baseSpeed;
-        baseDefense = baseStatusSO.baseDefense;
+        CurrentHP = baseStatusSO.MaxHP;
+        BaseAttack = baseStatusSO.BaseAttack;
+        BaseSpeed = baseStatusSO.BaseSpeed;
+        BaseDefense = baseStatusSO.BaseDefense;
     }
 }
 
