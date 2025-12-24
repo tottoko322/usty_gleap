@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9003944597478631060}
   - component: {fileID: 1017132997223056676}
-  - component: {fileID: 3718755560174439131}
   - component: {fileID: 5252164299204437383}
+  - component: {fileID: -5051289020582061209}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -92,19 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3718755560174439131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3582109014948741588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2922c055a8b3ea44b13f1a6a3f38fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  speed: 5
 --- !u!61 &5252164299204437383
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +138,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-5051289020582061209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582109014948741588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2922c055a8b3ea44b13f1a6a3f38fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  speed: 5

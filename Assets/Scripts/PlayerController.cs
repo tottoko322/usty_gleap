@@ -2,17 +2,36 @@ using UnityEngine;
 //追加
 using UnityEngine.InputSystem;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
 {
   public float speed = 5f;
 
   //追加
   private Vector2 moveInput;
+  private PlayerInputActions inputActions;
+
+  void Awake()
+  {
+    inputActions = new PlayerInputActions();
+    inputActions.Player.AddCallbacks(this);
+  }
+
+  void OnEnable()
+  {
+    inputActions.Player.Enable();
+  }
+
+  void OnDisable()
+  {
+      inputActions.Player.Disable();
+  }
+
 
   // PlayerInput から呼ばれる
   public void OnMove(InputAction.CallbackContext context)
   {
     moveInput = context.ReadValue<Vector2>();
+    Debug.Log("MoveInput: " + moveInput);
   }
 
   void Update()

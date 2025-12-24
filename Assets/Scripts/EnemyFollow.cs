@@ -33,7 +33,7 @@ public class EnemyFollow : MonoBehaviour
       isGameOver = true;
 
       //プレイヤーの動きを止める
-      PlayerMove playerScript = collision.gameObject.GetComponent<PlayerMove>();
+      PlayerController playerScript = collision.gameObject.GetComponent<PlayerController>();
       if (playerScript != null)
       {
         playerScript.enabled = false;
