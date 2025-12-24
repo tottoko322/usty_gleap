@@ -198,6 +198,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &133587058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7900997591495169756, guid: 8249030ac1c0ed44b8af7dc8c622483d, type: 3}
+  m_PrefabInstance: {fileID: 565962295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &133587066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133587058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e7facdae829b34f823c7be05defad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Death
+--- !u!114 &133587067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133587058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af11bec1366ffe74bb247caca431c16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusManager
+  baseStatusSO: {fileID: 11400000, guid: 3f4339dd5cc85854caa3d43e5fe76eb4, type: 2}
+  buffStatusSO: {fileID: 11400000, guid: c1042dfe0ff48a946a1e6660f8690fac, type: 2}
 --- !u!4 &463024395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9003944597478631060, guid: 3e8d0fa12e987d6499120557e3bce735, type: 3}
@@ -399,7 +430,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7900997591495169756, guid: 8249030ac1c0ed44b8af7dc8c622483d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 133587066}
+    - targetCorrespondingSourceObject: {fileID: 7900997591495169756, guid: 8249030ac1c0ed44b8af7dc8c622483d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 133587067}
   m_SourcePrefab: {fileID: 100100000, guid: 8249030ac1c0ed44b8af7dc8c622483d, type: 3}
 --- !u!1 &619394800
 GameObject:

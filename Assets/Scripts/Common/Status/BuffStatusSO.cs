@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BuffStatus", menuName = "Scriptable Objects/BuffStatus")]
+[CreateAssetMenu(fileName = "BuffStatus", menuName = "Status/BuffStatus")]
 public class BuffStatusSO : ScriptableObject
 {
     [Header("Attack Buff")]

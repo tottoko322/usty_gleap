@@ -11,6 +11,7 @@ public class StatusManager : MonoBehaviour
     private BaseStatus baseStatus;
 
     private BuffStatus buffStatus;
+
     void Awake()
     {
         baseStatus = new BaseStatus(baseStatusSO);
@@ -21,6 +22,9 @@ public class StatusManager : MonoBehaviour
     void Update()
     {
     }
+
+    public BaseStatus BaseStatus => baseStatus;
+    public BuffStatus BuffStatus => buffStatus;
 
     public void ApplyDamage(float damage)
     {

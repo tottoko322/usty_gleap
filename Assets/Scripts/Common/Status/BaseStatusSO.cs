@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BaseStatus", menuName = "Scriptable Objects/BaseStatus")]
+[CreateAssetMenu(fileName = "BaseStatus", menuName = "Status/BaseStatus")]
 public class BaseStatusSO : ScriptableObject
 {
     [Header("Base Parameters")]
