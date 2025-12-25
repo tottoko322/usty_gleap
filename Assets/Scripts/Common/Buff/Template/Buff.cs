@@ -53,9 +53,9 @@ public abstract class Buff : ScriptableObject
 //         return;
 //     }
 
-    // public override void Initialize()
-    // {
-    //     _buffStatus = new BuffStatus(_buffStatusSO);
-    // }
+//     public override void Initialize()
+//     {
+//         _buffStatus = new BuffStatus(_buffStatusSO);
+//     }
 
 // }
