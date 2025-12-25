@@ -8,7 +8,7 @@ public class BuffStatusSO : ScriptableObject
     [Min(0f)]
     [SerializeField] public float addAttack = 0f;
 
-    [Min(1f)]
+    [Min(0f)]
     [SerializeField] public float multipleAttack = 1f;
 
     [Header("Speed Buff")]
@@ -16,7 +16,7 @@ public class BuffStatusSO : ScriptableObject
     [Min(0f)]
     [SerializeField] public float addSpeed = 0f;
 
-    [Min(1f)]
+    [Min(0f)]
     [SerializeField] public float multipleSpeed = 1f;
 
     // ===== Getter =====

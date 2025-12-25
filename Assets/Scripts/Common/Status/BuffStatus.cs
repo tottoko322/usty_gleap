@@ -27,13 +27,41 @@ public class BuffStatus
         MultipleSpeed = value;
     }
 
-    //コンストラクタ
+    //buffStatusからのコンストラクタ
     public BuffStatus(BuffStatusSO buffStatusSO)
     {
         AddAttack = buffStatusSO.AddAttack;
         MultipleAttack = buffStatusSO.MultipleAttack;
         AddSpeed =buffStatusSO.AddSpeed;
         MultipleSpeed = buffStatusSO.MultipleSpeed;
+    }
+    //デフォルト値コンストラクタ
+    public BuffStatus()
+    {
+        AddAttack = 0f;
+        MultipleAttack = 1f;
+        AddSpeed = 0f;
+        MultipleSpeed = 1f;
+    }
+
+    //BuffStatusからのコンストラクタ
+    public BuffStatus(BuffStatus buffStatus)
+    {
+        AddAttack = buffStatus.AddAttack;
+        MultipleAttack = buffStatus.MultipleAttack;
+        AddSpeed = buffStatus.AddSpeed;
+        MultipleSpeed = buffStatus.MultipleSpeed;
+    }
+
+    public BuffStatus Merged(BuffStatus other)
+    {
+        return new BuffStatus
+        {
+            AddAttack = this.AddAttack + other.AddAttack,
+            MultipleAttack = this.MultipleAttack * other.MultipleAttack,
+            AddSpeed = this.AddSpeed + other.AddSpeed,
+            MultipleSpeed = this.MultipleSpeed * other.MultipleSpeed
+        };
     }
 }
 //★BuffStatusは値の管理と、値の再セットだけ行う

@@ -6,6 +6,12 @@ public class EnemyFollow : MonoBehaviour
   public float speed = 4f; //敵の移動速度
   public float stopDistance = 1f;
   private bool isGameOver = false;
+  private StatusManager statusManager;
+
+  void Awake()
+  {
+    statusManager = GetComponent<StatusManager>();
+  }
 
   void Update()
   {
@@ -42,5 +48,7 @@ public class EnemyFollow : MonoBehaviour
       // 敵の動きを止める
       this.enabled = false;
     }
+    float currentAttack = statusManager.TemporaryBuffStatus.AddAttack;
+    Debug.Log("敵の現在の攻撃力: "+currentAttack);
   }
 }

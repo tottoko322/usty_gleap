@@ -11,12 +11,16 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
   private PlayerInputActions inputActions;
   //ノックバック用の機能クラス
   private Knockback knockback;
+  //攻撃用の機能クラス
   private Attack attack;
-
+  private Effector effector;
+  private Buffer buffer;
   void Awake()
   {
     knockback = GetComponent<Knockback>();
     attack = GetComponent<Attack>();
+    effector = GetComponent<Effector>();
+    buffer = GetComponent<Buffer>();
     inputActions = new PlayerInputActions();
     inputActions.Player.AddCallbacks(this);
   }
@@ -55,8 +59,11 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
   void OnCollisionEnter2D(Collision2D other)
   {
     Debug.Log("ぶつかりました！");
+    Debug.Log(other);
     GameObject otherGameObject = other.gameObject;
     knockback.DoKnockback(otherGameObject);
-    attack.MyAttack(otherGameObject);
+    // attack.MyAttack(otherGameObject);
+    // effector.GiveEffect(otherGameObject);
+    buffer.GiveBuff(otherGameObject);
   }
 }

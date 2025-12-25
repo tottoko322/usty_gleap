@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfad4780f4b1c2e4c88e7f8a4612cb78, type: 3}
-  m_Name: PlayerBuffStatus
+  m_Name: BuffStatusForPower
   m_EditorClassIdentifier: Assembly-CSharp::BuffStatusSO
-  addAttack: 0
-  multipleAttack: 1
+  addAttack: 10
+  multipleAttack: 0
   addSpeed: 0
-  multipleSpeed: 1
+  multipleSpeed: 0
