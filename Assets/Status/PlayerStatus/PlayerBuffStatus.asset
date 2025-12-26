@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfad4780f4b1c2e4c88e7f8a4612cb78, type: 3}
   m_Name: PlayerBuffStatus
   m_EditorClassIdentifier: Assembly-CSharp::BuffStatusSO
-  addAttack: 1
+  addAttack: 0
   multipleAttack: 1
   addSpeed: 0
   multipleSpeed: 1

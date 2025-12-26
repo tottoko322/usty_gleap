@@ -17,9 +17,12 @@ public class Attack : MonoBehaviour
 
     public void MyAttack(GameObject opposite)
     {
-        StatusManager oppositeStatusManager = opposite.GetComponent<StatusManager>();
-        float myAttackPower = myStatusManager.GetAttackPower();
-        oppositeStatusManager.ApplyDamage(myAttackPower);
+        if (opposite.TryGetComponent<IHasStatusManager>(out var hasStatus))
+        {
+            StatusManager oppositeStatusManager = hasStatus.Status;
+            float myAttackPower = myStatusManager.GetAttackPower();
+            oppositeStatusManager.ApplyDamage(myAttackPower);
+        }
     }
 }
 

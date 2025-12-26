@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class StatusManager : MonoBehaviour
+public class StatusManager : MonoBehaviour,IHasStatusManager
 {
     // ===== 初期値用 ScriptableObject =====
     [Header("Initial Status (ScriptableObject)")]
@@ -16,6 +16,9 @@ public class StatusManager : MonoBehaviour
     private BuffStatus temporaryBuffStatus;
     private List<Buff> buffs;
     private List<Effect> effects;
+
+    //インターフェースによるStatusManagerの取得
+    public StatusManager Status => this;
 
     void Awake()
     {
@@ -96,10 +99,11 @@ public class StatusManager : MonoBehaviour
         float addAttack = temporaryBuffStatus.AddAttack;
         float multipleAttack = temporaryBuffStatus.MultipleAttack;
 
+        Debug.Log("あなたの攻撃力は: "+(baseAttack + addAttack)*multipleAttack);
         return (baseAttack + addAttack)*multipleAttack;
     }
 }
 
 //★StatusManagerはStatusインスタンスの保持と、変更ルールに応じたメソッドを設定
 
-//外部関数はStatusManagerを用いることでメソッドを呼び出すだけで簡単に値変更できる。
+//外部関数はStatusManagerを用いてメソッドを呼び出すだけで、簡単に値変更できるようにしてある。

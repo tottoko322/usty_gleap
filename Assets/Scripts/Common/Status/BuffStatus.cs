@@ -68,3 +68,19 @@ public class BuffStatus
 
 //コンストラクタをデフォルト値にすることで、インスタンス作成時に引数を不要にする。
 //statusを追加するには属性、セットメソッド、コンストラクタの初期値の三つを追加すること
+
+/*
+「取得ステータスの概念」
+
+base：基本ステータス値
+add：標準バフによる加算
+multiple：標準バフによる乗算
+tempAdd.sum：一時的なバフの加算の和
+tempMultiple.sum：一時的なバフの乗算の和
+
+これらより、正味の値は以下のようになる。
+
+(base + add + temAdd.sum)*(multiple + temMultiple.sum)
+
+これらをAttack,Speed,Defense,...などのすべてのステータスに構造として適応する。
+*/

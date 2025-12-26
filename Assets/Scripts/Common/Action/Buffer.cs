@@ -17,7 +17,10 @@ public class Buffer : MonoBehaviour
     public void GiveBuff(GameObject other)
     {
         Buff copiedBuff = Instantiate(buff);
-        StatusManager otherStatusManager = other.GetComponent<StatusManager>();
-        otherStatusManager.AddBuff(copiedBuff);
+        if (other.TryGetComponent<IHasStatusManager>(out var hasStatus))
+        {
+            StatusManager otherStatusManager = hasStatus.Status;
+            otherStatusManager.AddBuff(copiedBuff);
+        }
     }
 }

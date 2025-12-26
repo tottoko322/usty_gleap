@@ -22,8 +22,11 @@ public class Effector : MonoBehaviour
     public void GiveEffect(GameObject other)
     {
         Effect copiedEffect = Instantiate(effect);
-        StatusManager otherStatusManager = other.GetComponent<StatusManager>();
-        otherStatusManager.AddEffect(copiedEffect);
+        if (other.TryGetComponent<IHasStatusManager>(out var hasStatus))
+        {
+            StatusManager otherStatusManager = hasStatus.Status;
+            otherStatusManager.AddEffect(copiedEffect);
+        }
     }
 }
 

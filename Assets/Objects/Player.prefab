@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 8626980723577764319}
   - component: {fileID: 5944167998595671886}
   - component: {fileID: 2848304785284285298}
+  - component: {fileID: 5786912508849290930}
+  - component: {fileID: 1746051127445325460}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -221,3 +223,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5786912508849290930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582109014948741588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5c3014ee4d5c9448d162d90f56fde6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectorBehavior
+  effect: {fileID: 11400000, guid: 8dbfbd725ba50174d9f3928d6ff7af9b, type: 2}
+--- !u!114 &1746051127445325460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582109014948741588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c05a7a98ca6f144903fe7263c9a216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Buffer
+  buff: {fileID: 11400000, guid: a4f90e2afc98d9c499130cb73353d004, type: 2}
