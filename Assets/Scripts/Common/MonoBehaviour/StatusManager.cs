@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 public class StatusManager : MonoBehaviour,IHasStatusManager
 {
-    // ===== 初期値用 ScriptableObject =====
-    [Header("Initial Status (ScriptableObject)")]
-    [SerializeField] private BaseStatusSO baseStatusSO;
-    [SerializeField] private BuffStatusSO buffStatusSO;
+    // ===== StatusHolderの参照 =====
 
+    private StatusHolder statusHolder;
     // ===== 実行時ステータス =====
     private BaseStatus baseStatus;
 
@@ -19,20 +17,16 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
 
     //インターフェースによるStatusManagerの取得
     public StatusManager Status => this;
-
-    void Awake()
-    {
-        //基本用
-        baseStatus = new BaseStatus(baseStatusSO);
-        buffStatus = new BuffStatus(buffStatusSO);
-        //バッファー用
-        temporaryBuffStatus = new BuffStatus(buffStatusSO);
-        buffs = new List<Buff>() {};
-        effects = new List<Effect> {};
-    }
-
     void Start()
     {
+        statusHolder = GetComponent<StatusHolder>();
+        //基本用
+        baseStatus = statusHolder.GetBaseStatus;
+        buffStatus = statusHolder.GetBuffStatus;
+        //バッファー用
+        temporaryBuffStatus = statusHolder.GetTemporaryBuffStatus;
+        buffs = statusHolder.GetBuffs;
+        effects = statusHolder.GetEffects;
     }
 
     // Update is called once per frame
@@ -49,7 +43,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     //バフの処理
     public void ApplyBuff()
     {
-        BuffStatus resultBuffStatus = new BuffStatus(buffStatusSO);
+        BuffStatus resultBuffStatus = new BuffStatus(buffStatus);
         if(buffs.Count <= 0) return;
         foreach (var buff in buffs)
         {

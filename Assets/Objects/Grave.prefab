@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 475544190454031319}
   - component: {fileID: 784465765187668276}
   - component: {fileID: 5036210692778223681}
+  - component: {fileID: 3384903763175153911}
+  - component: {fileID: -4508385274668107327}
   m_Layer: 0
   m_Name: Grave
   m_TagString: Untagged
@@ -178,5 +180,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af11bec1366ffe74bb247caca431c16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatusManager
+--- !u!114 &3384903763175153911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2541214235751769276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da72d18145b031d4ca0e2cdbc6c150fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusActionHolder
+  selfActions: []
+  targetActions: []
+--- !u!114 &-4508385274668107327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2541214235751769276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4176f97495edd43969deae8912f0a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusHolder
   baseStatusSO: {fileID: 11400000, guid: 31038fc0eb88b4d4aaad2fc28531455e, type: 2}
   buffStatusSO: {fileID: 11400000, guid: 76457ad47920aac448f2a0f272d4d4d9, type: 2}

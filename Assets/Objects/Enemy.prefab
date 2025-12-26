@@ -14,10 +14,7 @@ GameObject:
   - component: {fileID: 5404518737656942523}
   - component: {fileID: 3473272399624581993}
   - component: {fileID: 1244882610627716706}
-  - component: {fileID: 8557843419828174676}
-  - component: {fileID: 1720077707642256405}
   - component: {fileID: 6201420893273491069}
-  - component: {fileID: 5076218355969732732}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -199,30 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Knockback
   force: 5
---- !u!114 &8557843419828174676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7900997591495169756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 434e592399634aa4aacdd8f6427b47c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Attack
---- !u!114 &1720077707642256405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7900997591495169756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e7facdae829b34f823c7be05defad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Death
 --- !u!114 &6201420893273491069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,18 +208,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af11bec1366ffe74bb247caca431c16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatusManager
-  baseStatusSO: {fileID: 11400000, guid: 3f4339dd5cc85854caa3d43e5fe76eb4, type: 2}
-  buffStatusSO: {fileID: 11400000, guid: c1042dfe0ff48a946a1e6660f8690fac, type: 2}
---- !u!114 &5076218355969732732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7900997591495169756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df65303618225ba4ebb4ef2e366c9cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GenerateGrave
-  Grave: {fileID: 2541214235751769276, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}

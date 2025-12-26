@@ -11,18 +11,16 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
   private PlayerInputActions inputActions;
   //ノックバック用の機能クラス
   private Knockback knockback;
-  //攻撃用の機能クラス
-  private Attack attack;
-  private Effector effector;
-  private Buffer buffer;
+  private StatusActionHolder statusActionHolder;
+  private TargetStatusAction attackAction;
   void Awake()
   {
-    knockback = GetComponent<Knockback>();
-    attack = GetComponent<Attack>();
-    effector = GetComponent<Effector>();
-    buffer = GetComponent<Buffer>();
     inputActions = new PlayerInputActions();
     inputActions.Player.AddCallbacks(this);
+    //StatusActionの初期設定
+    knockback = GetComponent<Knockback>();
+    statusActionHolder = GetComponent<StatusActionHolder>();
+    attackAction = statusActionHolder.GetTargetStatusActionFromIndex(0);
   }
 
   void OnEnable()
@@ -60,8 +58,6 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
   {
     GameObject otherGameObject = other.gameObject;
     knockback.DoKnockback(otherGameObject);
-    attack.MyAttack(otherGameObject);
-    // effector.GiveEffect(otherGameObject);
-    buffer.GiveBuff(otherGameObject);
+    attackAction.Execute(this.gameObject,otherGameObject);
   }
 }

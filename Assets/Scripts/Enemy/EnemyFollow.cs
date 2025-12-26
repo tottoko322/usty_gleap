@@ -7,12 +7,15 @@ public class EnemyFollow : MonoBehaviour
   public float stopDistance = 1f;
   private bool isGameOver = false;
   private StatusManager statusManager;
+  private StatusActionHolder statusActionHolder;
   private GenerateGrave generateGrave;
-
+  private SelfStatusAction deathAction;
   void Awake()
   {
     statusManager = GetComponent<StatusManager>();
     generateGrave = GetComponent<GenerateGrave>();
+    statusActionHolder = GetComponent<StatusActionHolder>();
+    deathAction = statusActionHolder.GetSelfStatusActionFromIndex(0);
   }
 
   void Update()
@@ -36,6 +39,9 @@ public class EnemyFollow : MonoBehaviour
     {
       generateGrave.Generate(transform.position);
     }
+
+    //死の追加
+    deathAction.Execute(this.gameObject);
   }
 
   void OnCollisionEnter2D(Collision2D collision)
