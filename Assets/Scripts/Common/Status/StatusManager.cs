@@ -47,9 +47,7 @@ public class StatusManager : MonoBehaviour
     public void ApplyBuff()
     {
         BuffStatus resultBuffStatus = new BuffStatus(buffStatusSO);
-        Debug.Log(buffs.Count);
         if(buffs.Count <= 0) return;
-        buffs.ForEach(buff => Debug.Log(buff.GetBuffStatus().AddAttack));
         foreach (var buff in buffs)
         {
             // 各バフの BuffStatus をコピーしてからマージ
@@ -61,7 +59,6 @@ public class StatusManager : MonoBehaviour
         buffs.RemoveAll(buff => buff.GetDuration() <= 0);
 
         temporaryBuffStatus = resultBuffStatus;
-        Debug.Log("バフ後の攻撃力は"+resultBuffStatus.AddAttack);
     }
     public void AddBuff(Buff buff)
     {

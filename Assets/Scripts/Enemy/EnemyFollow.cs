@@ -7,10 +7,12 @@ public class EnemyFollow : MonoBehaviour
   public float stopDistance = 1f;
   private bool isGameOver = false;
   private StatusManager statusManager;
+  private GenerateGrave generateGrave;
 
   void Awake()
   {
     statusManager = GetComponent<StatusManager>();
+    generateGrave = GetComponent<GenerateGrave>();
   }
 
   void Update()
@@ -27,6 +29,12 @@ public class EnemyFollow : MonoBehaviour
     if(distance > stopDistance){
       //方向に向かって移動
       transform.position += direction * speed * Time.deltaTime;
+    }
+
+    //お墓の生成
+    if (statusManager.BaseStatus.CurrentHP <= 0)
+    {
+      generateGrave.Generate(transform.position);
     }
   }
 

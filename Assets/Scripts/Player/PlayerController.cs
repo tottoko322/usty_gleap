@@ -58,11 +58,9 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
   }
   void OnCollisionEnter2D(Collision2D other)
   {
-    Debug.Log("ぶつかりました！");
-    Debug.Log(other);
     GameObject otherGameObject = other.gameObject;
     knockback.DoKnockback(otherGameObject);
-    // attack.MyAttack(otherGameObject);
+    attack.MyAttack(otherGameObject);
     // effector.GiveEffect(otherGameObject);
     buffer.GiveBuff(otherGameObject);
   }
