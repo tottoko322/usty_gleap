@@ -84,11 +84,17 @@ public class StatusManager : MonoBehaviour
         baseStatus.SetCurrentHP(currentHP - damage);
     }
 
+    public void ApplyHeal(float amount)
+    {
+        float currentHP = baseStatus.CurrentHP;
+        baseStatus.SetCurrentHP(currentHP + amount);
+    }
+
     public float GetAttackPower()
     {
         float baseAttack = baseStatus.BaseAttack;
-        float addAttack = buffStatus.AddAttack;
-        float multipleAttack = buffStatus.MultipleAttack;
+        float addAttack = temporaryBuffStatus.AddAttack;
+        float multipleAttack = temporaryBuffStatus.MultipleAttack;
 
         return (baseAttack + addAttack)*multipleAttack;
     }
