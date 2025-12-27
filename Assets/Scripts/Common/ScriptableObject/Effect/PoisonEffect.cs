@@ -8,13 +8,15 @@ public class PoisonEffect : Effect
     [SerializeField] private float _duration;
     [Min(0f)]
     [SerializeField] private float _interval;
+    [Min(0f)]
+    [SerializeField] private float _damage;
     public override float Interval { get => _duration; set => _duration = value;}
     public override float Duration { get => _interval; set => _interval = value;}
 
     public override void CustomEffect(StatusManager ownStatusManager)
     {
         // ダメージ処理
-        ownStatusManager.ApplyDamage(1f);
+        ownStatusManager.ApplyDamage(_damage);
         Debug.Log($"毒が効いた！");
         return;
     }

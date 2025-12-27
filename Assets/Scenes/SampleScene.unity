@@ -231,7 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatusActionHolder
   selfActions:
   - {fileID: 11400000, guid: cd44d25c2afef0d4d9bd7d89a60a6fa4, type: 2}
-  targetActions: []
+  targetActions:
+  - {fileID: 11400000, guid: 76d6a9f4f5d59d34abe1f4239b1d62f2, type: 2}
 --- !u!114 &133587078
 MonoBehaviour:
   m_ObjectHideFlags: 0
