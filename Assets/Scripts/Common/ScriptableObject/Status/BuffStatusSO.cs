@@ -25,3 +25,12 @@ public class BuffStatusSO : ScriptableObject
     public float AddSpeed => addSpeed;
     public float MultipleSpeed => multipleSpeed;
 }
+
+[System.Serializable]
+public class BuffStatusParam
+{
+    public float AddAttack;
+    public float MultipleAttack;
+    public float AddSpeed;
+    public float MultipleSpeed;
+}

@@ -15,6 +15,7 @@ public class BuffAction : TargetStatusAction
             foreach(Buff buff in buffs)
             {
                 Buff copiedBuff = Instantiate(buff);
+                copiedBuff.Initialize(user.GetInstanceID());
                 otherStatusManager.AddBuff(copiedBuff);
             }
         }

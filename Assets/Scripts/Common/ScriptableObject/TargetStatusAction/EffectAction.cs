@@ -10,10 +10,11 @@ public class EffectAction : TargetStatusAction
     {
         if (target.TryGetComponent<IHasStatusManager>(out var hasStatus))
         {
+            StatusManager otherStatusManager = hasStatus.Status;
             foreach(Effect effect in effects)
             {
                 Effect copiedEffect = Instantiate(effect);
-                StatusManager otherStatusManager = hasStatus.Status;
+                copiedEffect.Initialize(user.GetInstanceID());
                 otherStatusManager.AddEffect(copiedEffect);
             }
         }

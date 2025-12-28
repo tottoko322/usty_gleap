@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfad4780f4b1c2e4c88e7f8a4612cb78, type: 3}
-  m_Name: BuffStatusForPower
-  m_EditorClassIdentifier: Assembly-CSharp::BuffStatusSO
-  addAttack: 10
-  multipleAttack: 0
-  addSpeed: 0
-  multipleSpeed: 0
+  m_Script: {fileID: 11500000, guid: e774a65ea2fdbb04fa44284799200306, type: 3}
+  m_Name: PlayerEffectAction
+  m_EditorClassIdentifier: Assembly-CSharp::EffectAction
+  effects:
+  - {fileID: 11400000, guid: 8dbfbd725ba50174d9f3928d6ff7af9b, type: 2}

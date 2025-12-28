@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class StatusManager : MonoBehaviour,IHasStatusManager
 {
@@ -44,36 +45,85 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     public void ApplyBuff()
     {
         BuffStatus resultBuffStatus = new BuffStatus(buffStatus);
+        // buffの数が0であればそもそも処理しない
         if(buffs.Count <= 0) return;
-        foreach (var buff in buffs)
+        foreach (Buff buff in buffs)
         {
+            // buffのIntervalが0よりも大きければ処理を飛ばす。
+            if(buff.GetInterval() > 0) continue;
             // 各バフの BuffStatus をコピーしてからマージ
             var buffStatusCopy = new BuffStatus(buff.GetBuffStatus());
             resultBuffStatus = resultBuffStatus.Merged(buffStatusCopy);
         }
-        buffs.ForEach(buff => buff.EmbedBuff(this));
-        buffs.ForEach(buff => buff.ChangeDuration(-Time.deltaTime));
+        foreach(Buff buff in buffs)
+        {
+            // buffのIntervalが0よりも大きければ処理を飛ばす。
+            if(buff.GetInterval() > 0) continue;
+            buff.EmbedBuff(this);
+            // 各バフのIntervalをリセットする。
+            float buffStaticInterval = buff.GetStaticInterval();
+            buff.SetInterval(buffStaticInterval);
+        }
+        foreach (Buff buff in buffs)
+        {
+            // DurationとIntervalの値を減らす。
+            buff.ChangeDuration(-Time.deltaTime);
+            buff.ChangeInterval(-Time.deltaTime);
+        }
         buffs.RemoveAll(buff => buff.GetDuration() <= 0);
-
         temporaryBuffStatus = resultBuffStatus;
     }
     public void AddBuff(Buff buff)
     {
-        buff.Initialize();
+        // buffを渡したオブジェクトとassetの種類が同じであれば追加しない。
+        bool alreadyExists = buffs.Any(b =>
+            b.ObjectId == buff.ObjectId &&
+            b.name == buff.name
+        );
+
+        if (alreadyExists) return;
+
         buffs.Add(buff);
     }
 
     //エフェクトの処理
     public void ApplyEffect()
     {
+        // effectの数が0であればそもそも処理しない
         if (effects.Count == 0) return;
-        effects.ForEach(effect => effect.CustomEffect(this));
-        effects.ForEach(effect => effect.ChangeDuration(-Time.deltaTime));
+        foreach(Effect effect in effects)
+        {
+            // effectのIntervalが0よりも大きければ処理を飛ばす。
+            if(effect.GetInterval() > 0) continue;
+            // 各エフェクトの処理を行う。
+            effect.CustomEffect(this);
+            // 各エフェクトのIntervalをリセットする。
+            float effectStaticInterval = effect.GetStaticInterval();
+            effect.SetInterval(effectStaticInterval);
+            Debug.Log("Duration: "+effect.GetDuration());
+        }
+        foreach(Effect effect in effects)
+        {
+            // DurationとIntervalの値を減らす。
+            effect.ChangeDuration(-Time.deltaTime);
+            effect.ChangeInterval(-Time.deltaTime);
+            // Debug.Log("interval: "+effect.GetInterval());
+            // Debug.Log("staticInterval : "+effect.GetStaticInterval());
+        }
         effects.RemoveAll(effect => effect.GetDuration() <= 0);
     }
     public void AddEffect(Effect effect)
     {
+        // effectを渡したオブジェクトとassetの種類が同じであれば追加しない。
+        bool alreadyExists = effects.Any(e =>
+            e.ObjectId == effect.ObjectId &&
+            e.name == effect.name
+        );
+
+        if(alreadyExists) return;
+
         effects.Add(effect);
+        Debug.Log("追加しました");
     }
     public void ApplyDamage(float damage)
     {
@@ -101,3 +151,5 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
 //★StatusManagerはStatusインスタンスの保持と、変更ルールに応じたメソッドを設定
 
 //外部関数はStatusManagerを用いてメソッドを呼び出すだけで、簡単に値変更できるようにしてある。
+
+//・Intervalの実装、付与したインスタンスのIDとBuffまたはEffect名が一致したら外すようにする。

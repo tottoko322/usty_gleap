@@ -1,5 +1,7 @@
 public class BuffStatus
 {
+    private BuffStatusParam param;
+
     //属性
     public float AddAttack {get; private set;}
     public float MultipleAttack {get; private set;}
@@ -51,6 +53,11 @@ public class BuffStatus
         MultipleAttack = buffStatus.MultipleAttack;
         AddSpeed = buffStatus.AddSpeed;
         MultipleSpeed = buffStatus.MultipleSpeed;
+    }
+
+    public BuffStatus(BuffStatusParam param)
+    {
+        this.param = param;
     }
 
     public BuffStatus Merged(BuffStatus other)

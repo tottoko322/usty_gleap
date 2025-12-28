@@ -402,11 +402,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6750278133461265563, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.91
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 6750278133461265563, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.28
+      value: 2.31
       objectReference: {fileID: 0}
     - target: {fileID: 6750278133461265563, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -696,6 +696,7 @@ MonoBehaviour:
   selfActions: []
   targetActions:
   - {fileID: 11400000, guid: cdf24047eddca71449ac910d29fd901c, type: 2}
+  - {fileID: 11400000, guid: f5d9e77b533b1ed409a1dd896731ff8d, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

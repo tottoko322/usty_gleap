@@ -9,9 +9,14 @@ public class PoisonEffect : Effect
     [Min(0f)]
     [SerializeField] private float _interval;
     [Min(0f)]
+    [SerializeField] private float _staticInterval;
+    [Min(0f)]
     [SerializeField] private float _damage;
-    public override float Interval { get => _duration; set => _duration = value;}
-    public override float Duration { get => _interval; set => _interval = value;}
+    private int _objectId;
+    public override float Duration { get => _duration; set => _duration = value;}
+    public override float Interval { get => _interval; set => _interval = value;}
+    public override float StaticInterval { get => _staticInterval; set => _staticInterval = value; }
+    public override int ObjectId { get => _objectId ; set => _objectId = value; }
 
     public override void CustomEffect(StatusManager ownStatusManager)
     {
@@ -19,6 +24,11 @@ public class PoisonEffect : Effect
         ownStatusManager.ApplyDamage(_damage);
         Debug.Log($"毒が効いた！");
         return;
+    }
+
+    public override void Initialize(int objectId)
+    {
+        _objectId = objectId;
     }
 }
 

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
   private Knockback knockback;
   private StatusActionHolder statusActionHolder;
   private TargetStatusAction attackAction;
+  private TargetStatusAction playerEffectAction;
   void Awake()
   {
     inputActions = new PlayerInputActions();
@@ -21,7 +22,9 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
     knockback = GetComponent<Knockback>();
     statusActionHolder = GetComponent<StatusActionHolder>();
     attackAction = statusActionHolder.GetTargetStatusActionFromIndex(0);
+    playerEffectAction = statusActionHolder.GetTargetStatusActionFromIndex(1);
   }
+  
 
   void OnEnable()
   {
@@ -59,5 +62,6 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
     GameObject otherGameObject = other.gameObject;
     knockback.DoKnockback(otherGameObject);
     attackAction.Execute(this.gameObject,otherGameObject);
+    playerEffectAction.Execute(this.gameObject,otherGameObject);
   }
 }

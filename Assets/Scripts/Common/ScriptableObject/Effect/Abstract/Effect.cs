@@ -5,7 +5,10 @@ public abstract class Effect : ScriptableObject
     public abstract float Duration { get; set; }
 
     public abstract float Interval { get; set; }
+    public abstract float StaticInterval{get;set;}
+    public abstract int ObjectId {get; set; }
 
+    //Duration関連
     public float GetDuration()
     {
         return Duration;
@@ -21,25 +24,27 @@ public abstract class Effect : ScriptableObject
         Duration += delta;
     }
 
+    //Interval関連
+    public float GetInterval()
+    {
+        return Interval;
+    }
+
+    public void SetInterval(float interval)
+    {
+        Interval = interval;
+    }
+    public void ChangeInterval(float delta)
+    {
+        Interval += delta;
+    }
+    //StaticInterval関連
+    public float GetStaticInterval()
+    {
+        return StaticInterval;
+    }
+
+    public abstract void Initialize(int objectId);
     //ダメージ計算などする用でoverrides
     public abstract void CustomEffect(StatusManager ownStatusManager);
 }
-
-//★以下をコピペして、<name>を効果に応じた名前にすると新しいEffectが作れる。
-
-// using UnityEngine;
-
-// [CreateAssetMenu(fileName = "<name>Effect", menuName = "Effects/<name>")]
-// public class <name>Effect : Effect
-// {
-//     [Min(0f)]
-//     [SerializeField] private float _duration;
-//     [Min(0f)]
-//     [SerializeField] private float _interval;
-//     public override float Interval { get => _duration; set => _duration = value;}
-//     public override float Duration { get => _interval; set => _interval = value;}
-
-//     public override void CustomEffect(StatusManager ownStatusManager)
-//     {
-//     }
-// }
