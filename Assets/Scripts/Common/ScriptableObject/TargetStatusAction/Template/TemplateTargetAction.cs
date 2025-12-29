@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TemplateAction", menuName = "TargetStatusAction/TemplateAction")]
-public class TemplateAction : TargetStatusAction
+[CreateAssetMenu(fileName = "TemplateTargetAction", menuName = "TargetStatusAction/TemplateTargetAction")]
+public class TemplateTargetAction : TargetStatusAction
 {
     public override void Execute(GameObject user, GameObject target)
     {
