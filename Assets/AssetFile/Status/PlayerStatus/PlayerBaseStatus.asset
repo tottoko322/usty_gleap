@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerBaseStatus
   m_EditorClassIdentifier: Assembly-CSharp::BaseStatusSO
   maxHP: 10
-  baseAttack: 1
+  baseAttack: 0
   baseSpeed: 1
   baseDefense: 1
