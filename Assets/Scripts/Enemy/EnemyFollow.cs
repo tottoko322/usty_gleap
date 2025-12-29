@@ -6,6 +6,17 @@ public class EnemyFollow : MonoBehaviour
   public float speed = 4f; //敵の移動速度
   public float stopDistance = 1f;
   private bool isGameOver = false;
+  private StatusManager statusManager;
+  private StatusActionHolder statusActionHolder;
+  private GenerateGrave generateGrave;
+  private SelfStatusAction deathAction;
+  void Awake()
+  {
+    statusManager = GetComponent<StatusManager>();
+    generateGrave = GetComponent<GenerateGrave>();
+    statusActionHolder = GetComponent<StatusActionHolder>();
+    deathAction = statusActionHolder.GetSelfStatusActionFromIndex(0);
+  }
 
   void Update()
   {
@@ -22,18 +33,27 @@ public class EnemyFollow : MonoBehaviour
       //方向に向かって移動
       transform.position += direction * speed * Time.deltaTime;
     }
+
+    //お墓の生成
+    if (statusManager.BaseStatus.CurrentHP <= 0)
+    {
+      generateGrave.Generate(transform.position);
+    }
+
+    //死の追加
+    deathAction.Execute(this.gameObject);
   }
 
   void OnCollisionEnter2D(Collision2D collision)
   {
     //プレイヤーとぶつかったら
-    if (collision.gameObject.CompareTag("Player"))
+    if (collision.gameObject.CompareTag("Player") && false)
     {
       Debug.Log("Game Over!");
       isGameOver = true;
 
       //プレイヤーの動きを止める
-      PlayerMove playerScript = collision.gameObject.GetComponent<PlayerMove>();
+      PlayerController playerScript = collision.gameObject.GetComponent<PlayerController>();
       if (playerScript != null)
       {
         playerScript.enabled = false;
@@ -42,5 +62,7 @@ public class EnemyFollow : MonoBehaviour
       // 敵の動きを止める
       this.enabled = false;
     }
+    float currentAttack = statusManager.TemporaryBuffStatus.AddAttack;
+    Debug.Log("敵の現在の攻撃力: "+currentAttack);
   }
 }
