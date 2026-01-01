@@ -5,7 +5,6 @@ using System.Linq;
 public class StatusManager : MonoBehaviour,IHasStatusManager
 {
     // ===== StatusHolderの参照 =====
-
     private StatusHolder statusHolder;
     // ===== 実行時ステータス =====
     private BaseStatus baseStatus;
@@ -145,6 +144,16 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
 
         Debug.Log("あなたの攻撃力は: "+(baseAttack + addAttack)*multipleAttack);
         return (baseAttack + addAttack)*multipleAttack;
+    }
+
+    public float GetSpeed()
+    {
+        float baseSpeed = baseStatus.BaseSpeed;
+        float addSpeed = temporaryBuffStatus.AddSpeed;
+        float multipleSpeed = temporaryBuffStatus.MultipleSpeed;
+
+        Debug.Log("あなたの速度は: "+(baseSpeed + addSpeed)*multipleSpeed);
+        return (baseSpeed + addSpeed)*multipleSpeed;
     }
 }
 
