@@ -400,6 +400,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave
       objectReference: {fileID: 0}
+    - target: {fileID: 3384903763175153911, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
+      propertyPath: selfActions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384903763175153911, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
+      propertyPath: targetActions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384903763175153911, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
+      propertyPath: 'targetActions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2643c20fadad22e488907fd022252da7, type: 2}
     - target: {fileID: 6750278133461265563, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.31
@@ -443,7 +455,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2541214235751769276, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 654046464}
   m_SourcePrefab: {fileID: 100100000, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
 --- !u!1001 &565962295
 PrefabInstance:
@@ -685,6 +700,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 483530225812378597, guid: dd3c62d2f4f36e746bf5a69afe7c5748, type: 3}
   m_PrefabInstance: {fileID: 702629928}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &654046456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2541214235751769276, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}
+  m_PrefabInstance: {fileID: 545854054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &654046464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654046456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9dfc8905fa1da429ce37559fb97932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GlavePoisonController
+  effectRadius: 2
+  poisonEffect: {fileID: 11400000, guid: 8dbfbd725ba50174d9f3928d6ff7af9b, type: 2}
 --- !u!1001 &1883508986
 PrefabInstance:
   m_ObjectHideFlags: 0

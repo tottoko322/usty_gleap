@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e774a65ea2fdbb04fa44284799200306, type: 3}
   m_Name: EffectAction
   m_EditorClassIdentifier: Assembly-CSharp::EffectAction
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 8dbfbd725ba50174d9f3928d6ff7af9b, type: 2}
