@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GlavePoisonController : MonoBehaviour
+public class gravePoisonController : MonoBehaviour
 {
     [Header("Effect Area Settings")]
     [SerializeField] private float effectRadius = 2f;
@@ -39,7 +39,7 @@ public class GlavePoisonController : MonoBehaviour
             }
         }
         
-        Debug.Log($"Glaveの周りに半径{effectRadius}のPoisonEffectAreaを作成しました");
+        Debug.Log($"graveの周りに半径{effectRadius}のPoisonEffectAreaを作成しました");
     }
     
     // Gizmoで範囲を可視化（エディタ上で確認用）

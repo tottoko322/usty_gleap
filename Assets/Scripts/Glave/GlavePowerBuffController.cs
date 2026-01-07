@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GlavePowerBuffController : MonoBehaviour
+public class gravePowerBuffController : MonoBehaviour
 {
     [Header("Buff Area Settings")]
     [SerializeField] private float buffRadius = 2f;
@@ -39,7 +39,7 @@ public class GlavePowerBuffController : MonoBehaviour
             }
         }
         
-        Debug.Log($"Glaveの周りに半径{buffRadius}のPowerBuffAreaを作成しました");
+        Debug.Log($"graveの周りに半径{buffRadius}のPowerBuffAreaを作成しました");
     }
     
     // Gizmoで範囲を可視化（エディタ上で確認用）
