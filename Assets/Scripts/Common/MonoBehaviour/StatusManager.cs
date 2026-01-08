@@ -24,7 +24,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         baseStatus = statusHolder.GetBaseStatus;
         buffStatus = statusHolder.GetBuffStatus;
         //バッファー用
-        temporaryBuffStatus = statusHolder.GetTemporaryBuffStatus;
+        temporaryBuffStatus = new BuffStatus(statusHolder.GetTemporaryBuffStatus);
         buffs = statusHolder.GetBuffs;
         effects = statusHolder.GetEffects;
     }
@@ -44,6 +44,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     public void ApplyBuff()
     {
         BuffStatus resultBuffStatus = new BuffStatus(buffStatus);
+        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
         // buffの数が0であればそもそも処理しない
         if(buffs.Count <= 0) return;
         foreach (Buff buff in buffs)
@@ -70,7 +71,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
             buff.ChangeInterval(-Time.deltaTime);
         }
         buffs.RemoveAll(buff => buff.GetDuration() <= 0);
-        temporaryBuffStatus = resultBuffStatus;
+        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
     }
     public void AddBuff(Buff buff)
     {
@@ -151,7 +152,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         float baseSpeed = baseStatus.BaseSpeed;
         float addSpeed = temporaryBuffStatus.AddSpeed;
         float multipleSpeed = temporaryBuffStatus.MultipleSpeed;
-
+        Debug.Log("GetSpeedにおいての速度："+multipleSpeed);
         Debug.Log("あなたの速度は: "+(baseSpeed + addSpeed)*multipleSpeed);
         return (baseSpeed + addSpeed)*multipleSpeed;
     }
