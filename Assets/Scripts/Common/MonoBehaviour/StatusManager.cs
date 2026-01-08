@@ -47,6 +47,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         temporaryBuffStatus = new BuffStatus(resultBuffStatus);
         // buffの数が0であればそもそも処理しない
         if(buffs.Count <= 0) return;
+        // BuffStatusを合算
         foreach (Buff buff in buffs)
         {
             // buffのIntervalが0よりも大きければ処理を飛ばす。
@@ -55,11 +56,13 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
             var buffStatusCopy = new BuffStatus(buff.GetBuffStatus());
             resultBuffStatus = resultBuffStatus.Merged(buffStatusCopy);
         }
+        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
+        // 各バフはtemporaryを直接操作
         foreach(Buff buff in buffs)
         {
             // buffのIntervalが0よりも大きければ処理を飛ばす。
             if(buff.GetInterval() > 0) continue;
-            buff.EmbedBuff(this);
+            buff.EmbedBuff(temporaryBuffStatus);
             // 各バフのIntervalをリセットする。
             float buffStaticInterval = buff.GetStaticInterval();
             buff.SetInterval(buffStaticInterval);
@@ -71,7 +74,6 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
             buff.ChangeInterval(-Time.deltaTime);
         }
         buffs.RemoveAll(buff => buff.GetDuration() <= 0);
-        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
     }
     public void AddBuff(Buff buff)
     {

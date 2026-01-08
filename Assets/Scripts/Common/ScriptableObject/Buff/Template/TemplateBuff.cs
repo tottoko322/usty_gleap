@@ -20,9 +20,9 @@ public class TemplateBuff : Buff
     public override int ObjectId {get => _objectId; set => _objectId = value;}
 
     //Statusの加算がされた後に処理されるので、強制的なBuffStatusの変更に用いる。
-    public override void EmbedBuff(StatusManager statusManager)
+    public override void EmbedBuff(BuffStatus temporaryBuffStatus)
     {
-        //ここに書き加える。
+        //ここに書き加える。temporaryBuffを直接操作する。
         return;
     }
 
