@@ -4,9 +4,13 @@ public class AreaEffectTrigger : MonoBehaviour
 {
     [Header("Effect Settings")]
     [SerializeField] private Effect effectToApply;
+    [SerializeField] private string targetTag = "Enemy";
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // タグが一致しない場合は処理をスキップ
+        if (!other.CompareTag(targetTag)) return;
+        
         // StatusManagerを持つオブジェクトにエフェクトを適用
         StatusManager statusManager = other.GetComponent<StatusManager>();
         if (statusManager != null && effectToApply != null)

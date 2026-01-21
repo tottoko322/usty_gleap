@@ -4,9 +4,13 @@ public class AreaBuffTrigger : MonoBehaviour
 {
     [Header("Buff Settings")]
     [SerializeField] private Buff buffToApply;
+    [SerializeField] private string targetTag = "Player";
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // タグが一致しない場合は処理をスキップ
+        if (!other.CompareTag(targetTag)) return;
+        
         // StatusManagerを持つオブジェクトにバフを適用
         StatusManager statusManager = other.GetComponent<StatusManager>();
         if (statusManager != null && buffToApply != null)

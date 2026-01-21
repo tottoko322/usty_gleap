@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerBuff
   _duration: 3
   _interval: 0
-  _buffStatusSO: {fileID: 11400000, guid: 49fa6bfce49236c4ab6d2691a12c6692, type: 2}
+  _staticInterval: 0
+  _param:
+    AddAttack: 0
+    MultipleAttack: 2
+    AddSpeed: 0
+    MultipleSpeed: 10
