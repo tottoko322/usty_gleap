@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-  public Transform player; //playerのTransform
+  private Transform player; //playerのTransform
   public float speed = 4f; //敵の移動速度
   public float stopDistance = 1f;
   private bool isGameOver = false;
@@ -10,16 +10,18 @@ public class EnemyFollow : MonoBehaviour
   private StatusActionHolder statusActionHolder;
   private GenerateGrave generateGrave;
   private SelfStatusAction deathAction;
-  void Awake()
+  void Start()
   {
     statusManager = GetComponent<StatusManager>();
     generateGrave = GetComponent<GenerateGrave>();
     statusActionHolder = GetComponent<StatusActionHolder>();
     deathAction = statusActionHolder.GetSelfStatusActionFromIndex(0);
+    player = GameObject.FindWithTag("Player").transform;
   }
 
   void Update()
   {
+    speed = statusManager.GetSpeed(); 
     if (player == null || isGameOver){
       return;
     }

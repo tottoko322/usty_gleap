@@ -22,7 +22,7 @@ public class TemplateEffect : Effect
     }
     public override void Initialize(int objectId)
     {
-        //これはこのままでOK
+        //これはこのままでOK、EffectActionを利用した際に使用したオブジェクトのIDを格納する。
         _objectId = objectId;
         
     }

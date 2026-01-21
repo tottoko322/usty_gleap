@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TemplateEffect", menuName = "Effect/TemplateEffect")]
-public class TemplateEffect : Effect
+[CreateAssetMenu(fileName = "StunEffect", menuName = "Effect/StunEffect")]
+public class StunEffect : Effect
 {
     [Header("Effect Parameters")]
     [Min(0f)]
@@ -17,12 +17,14 @@ public class TemplateEffect : Effect
     public override int ObjectId { get => _objectId; set => _objectId = value; }
     public override void CustomEffect(StatusManager ownStatusManager)
     {
+        Debug.Log("StunEffect applied");
         //ここにStatusManagerでの処理を書く。
+        ownStatusManager.TemporaryBuffStatus.SetMultipleSpeed(0f);
         return;
     }
     public override void Initialize(int objectId)
     {
-        //これはこのままでOK
+        //これはこのままでOK、EffectActionを利用した際に使用したオブジェクトのIDを格納する。
         _objectId = objectId;
         
     }

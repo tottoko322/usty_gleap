@@ -57,5 +57,5 @@ public abstract class Buff : ScriptableObject
     }
     //Buffを付与するオブジェクトのIdを格納する。
     public abstract void Initialize(int objectId);
-    public abstract void EmbedBuff(StatusManager statusManager);
+    public abstract void EmbedBuff(BuffStatus temporaryBuffStatus);
 }
