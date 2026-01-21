@@ -74,6 +74,9 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     }
     public void AddBuff(Buff buff)
     {
+        // buffsがnullの場合は初期化されていないため、スキップ
+        if(buffs == null){return;}
+
         // buffを渡したオブジェクトとassetの種類が同じであれば追加しない。
         bool alreadyExists = buffs.Any(b =>
             b.ObjectId == buff.ObjectId &&
@@ -113,6 +116,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     }
     public void AddEffect(Effect effect)
     {
+        if(effects == null){return;}
         // effectを渡したオブジェクトとassetの種類が同じであれば追加しない。
         bool alreadyExists = effects.Any(e =>
             e.ObjectId == effect.ObjectId &&
