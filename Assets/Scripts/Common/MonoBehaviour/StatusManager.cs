@@ -24,7 +24,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         baseStatus = statusHolder.GetBaseStatus;
         buffStatus = statusHolder.GetBuffStatus;
         //バッファー用
-        temporaryBuffStatus = statusHolder.GetTemporaryBuffStatus;
+        temporaryBuffStatus = new BuffStatus(statusHolder.GetTemporaryBuffStatus);
         buffs = statusHolder.GetBuffs;
         effects = statusHolder.GetEffects;
     }
@@ -44,8 +44,10 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     public void ApplyBuff()
     {
         BuffStatus resultBuffStatus = new BuffStatus(buffStatus);
+        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
         // buffの数が0であればそもそも処理しない
         if(buffs.Count <= 0) return;
+        // BuffStatusを合算
         foreach (Buff buff in buffs)
         {
             // buffのIntervalが0よりも大きければ処理を飛ばす。
@@ -54,11 +56,13 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
             var buffStatusCopy = new BuffStatus(buff.GetBuffStatus());
             resultBuffStatus = resultBuffStatus.Merged(buffStatusCopy);
         }
+        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
+        // 各バフはtemporaryを直接操作
         foreach(Buff buff in buffs)
         {
             // buffのIntervalが0よりも大きければ処理を飛ばす。
             if(buff.GetInterval() > 0) continue;
-            buff.EmbedBuff(this);
+            buff.EmbedBuff(temporaryBuffStatus);
             // 各バフのIntervalをリセットする。
             float buffStaticInterval = buff.GetStaticInterval();
             buff.SetInterval(buffStaticInterval);
@@ -70,7 +74,6 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
             buff.ChangeInterval(-Time.deltaTime);
         }
         buffs.RemoveAll(buff => buff.GetDuration() <= 0);
-        temporaryBuffStatus = resultBuffStatus;
     }
     public void AddBuff(Buff buff)
     {
@@ -155,7 +158,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         float baseSpeed = baseStatus.BaseSpeed;
         float addSpeed = temporaryBuffStatus.AddSpeed;
         float multipleSpeed = temporaryBuffStatus.MultipleSpeed;
-
+        Debug.Log("GetSpeedにおいての速度："+multipleSpeed);
         Debug.Log("あなたの速度は: "+(baseSpeed + addSpeed)*multipleSpeed);
         return (baseSpeed + addSpeed)*multipleSpeed;
     }

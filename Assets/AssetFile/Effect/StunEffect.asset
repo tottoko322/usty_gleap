@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe0b492f4e56dc47b87ecb1cf111cb4, type: 3}
-  m_Name: PowerBuff
-  m_EditorClassIdentifier: Assembly-CSharp::PowerBuff
-  _duration: 3
+  m_Script: {fileID: 11500000, guid: a0db8ff1bd488254d9619ebb989a5aa4, type: 3}
+  m_Name: StunEffect
+  m_EditorClassIdentifier: Assembly-CSharp::StunEffect
+  _duration: 0
   _interval: 0
   _staticInterval: 0
-  _param:
-    AddAttack: 5
-    MultipleAttack: 0
-    AddSpeed: 0
-    MultipleSpeed: 0

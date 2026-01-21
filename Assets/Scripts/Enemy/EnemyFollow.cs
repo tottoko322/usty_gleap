@@ -16,10 +16,12 @@ public class EnemyFollow : MonoBehaviour
     generateGrave = GetComponent<GenerateGrave>();
     statusActionHolder = GetComponent<StatusActionHolder>();
     deathAction = statusActionHolder.GetSelfStatusActionFromIndex(0);
+    Debug.Log("敵の速度: " + speed);
   }
 
   void Update()
   {
+    speed = statusManager.GetSpeed(); 
     if (player == null || isGameOver){
       return;
     }
