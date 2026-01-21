@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe0b492f4e56dc47b87ecb1cf111cb4, type: 3}
-  m_Name: PowerBuff
-  m_EditorClassIdentifier: Assembly-CSharp::PowerBuff
-  _duration: 3
+  m_Script: {fileID: 11500000, guid: b66306db6c93b4944b0d222ed20f7406, type: 3}
+  m_Name: SpeedBuff
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedBuff
+  _duration: 0
   _interval: 0
   _staticInterval: 0
   _param:
-    AddAttack: 5
+    AddAttack: 0
     MultipleAttack: 0
-    AddSpeed: 0
+    AddSpeed: 5
     MultipleSpeed: 0
