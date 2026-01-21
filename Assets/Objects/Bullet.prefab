@@ -109,7 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatusActionHolder
   selfActions: []
-  targetActions: []
+  targetActions:
+  - {fileID: 11400000, guid: cdf24047eddca71449ac910d29fd901c, type: 2}
 --- !u!114 &8551838992694737292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4176f97495edd43969deae8912f0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatusHolder
-  baseStatusSO: {fileID: 0}
-  buffStatusSO: {fileID: 0}
+  baseStatusSO: {fileID: 11400000, guid: 3c89934cf0d27fb4a8694db65ba3e366, type: 2}
+  buffStatusSO: {fileID: 11400000, guid: 3f8285c5ff9691145840ac953a848659, type: 2}
 --- !u!114 &4047926306778115750
 MonoBehaviour:
   m_ObjectHideFlags: 0
