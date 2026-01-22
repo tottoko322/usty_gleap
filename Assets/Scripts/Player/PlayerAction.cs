@@ -6,6 +6,7 @@ public class PlayerAction : MonoBehaviour
     private StatusActionHolder statusActionHolder;
     private TargetStatusAction attackAction;
     private TargetStatusAction playerEffectAction;
+    private TargetStatusAction playerBuffAction;
 
     void Awake()
     {
@@ -14,6 +15,7 @@ public class PlayerAction : MonoBehaviour
 
         attackAction = statusActionHolder.GetTargetStatusActionFromIndex(0);
         playerEffectAction = statusActionHolder.GetTargetStatusActionFromIndex(1);
+        playerBuffAction = statusActionHolder.GetTargetStatusActionFromIndex(2);
     }
 
     public void HandleCollision(GameObject otherGameObject)
@@ -21,5 +23,6 @@ public class PlayerAction : MonoBehaviour
         knockback.DoKnockback(otherGameObject);
         attackAction.Execute(this.gameObject, otherGameObject);
         playerEffectAction.Execute(this.gameObject, otherGameObject);
+        playerBuffAction.Execute(this.gameObject, otherGameObject);
     }
 }

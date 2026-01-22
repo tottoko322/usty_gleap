@@ -21,7 +21,7 @@ public class EnemyFollow : MonoBehaviour
 
   void Update()
   {
-    speed = statusManager.GetSpeed(); 
+    speed = statusManager.GetSpeed();
     if (player == null || isGameOver){
       return;
     }
@@ -55,8 +55,7 @@ public class EnemyFollow : MonoBehaviour
       isGameOver = true;
 
       //プレイヤーの動きを止める
-      PlayerController playerScript = collision.gameObject.GetComponent<PlayerController>();
-      if (playerScript != null)
+      if (collision.gameObject.TryGetComponent<PlayerController>(out var playerScript))
       {
         playerScript.enabled = false;
       }
@@ -64,7 +63,7 @@ public class EnemyFollow : MonoBehaviour
       // 敵の動きを止める
       this.enabled = false;
     }
-    float currentAttack = statusManager.TemporaryBuffStatus.AddAttack;
+    float currentAttack = statusManager.GetAttackPower();
     Debug.Log("敵の現在の攻撃力: "+currentAttack);
   }
 }
