@@ -6,7 +6,7 @@ public abstract class Buff : ScriptableObject
     public abstract float Interval{get; set; }
     public abstract float StaticInterval {get;set;}
     public abstract int ObjectId {get; set; }
-    public abstract BuffStatus BuffStatus{get; set; }
+    public abstract BuffStatus  BuffStatus{get; set; }
 
     //Duration関連
     public float GetDuration()

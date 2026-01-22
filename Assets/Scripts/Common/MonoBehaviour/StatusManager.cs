@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 public class StatusManager : MonoBehaviour,IHasStatusManager
 {
@@ -14,9 +15,13 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     private BuffStatus temporaryBuffStatus;
     private List<Buff> buffs;
     private List<Effect> effects;
+    private Coroutine loopRoutine;
 
     //インターフェースによるStatusManagerの取得
     public StatusManager Status => this;
+    public BaseStatus BaseStatus => baseStatus;
+    public BuffStatus BuffStatus => buffStatus;
+    public BuffStatus TemporaryBuffStatus => temporaryBuffStatus;
     void Start()
     {
         statusHolder = GetComponent<StatusHolder>();
@@ -27,20 +32,27 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         temporaryBuffStatus = new BuffStatus(statusHolder.GetTemporaryBuffStatus);
         buffs = statusHolder.GetBuffs;
         effects = statusHolder.GetEffects;
+        // バフとエフェクトの適用を繰り返す
+        loopRoutine = StartCoroutine(Loop(0.01f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateBuffs(Time.deltaTime);
-        RecalculateBuffStatus();
-        UpdateEffects(Time.deltaTime);
-        TriggerEffects();
     }
 
-    public BaseStatus BaseStatus => baseStatus;
-    public BuffStatus BuffStatus => buffStatus;
-    public BuffStatus TemporaryBuffStatus => temporaryBuffStatus;
+    IEnumerator Loop(float interval)
+    {
+        while (true)
+        {
+            UpdateBuffs(interval);
+            RecalculateBuffStatus();
+            UpdateEffects(interval);
+            TriggerEffects();
+            // interval秒待つ
+            yield return new WaitForSeconds(interval);
+        }
+    }
 
     //バフの処理
     public void UpdateBuffs(float deltaTime)
