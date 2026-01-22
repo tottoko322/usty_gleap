@@ -23,7 +23,7 @@ public class StatusHolder : MonoBehaviour
         baseStatus = new BaseStatus(baseStatusSO);
         buffStatus = new BuffStatus(buffStatusSO);
         //バッファー用
-        temporaryBuffStatus = new BuffStatus(buffStatusSO);
+        temporaryBuffStatus = new BuffStatus(buffStatus);
         buffs = new List<Buff>() {};
         effects = new List<Effect> {};
     }

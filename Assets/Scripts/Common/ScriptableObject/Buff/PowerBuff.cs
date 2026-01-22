@@ -28,6 +28,7 @@ public class PowerBuff : Buff
     {
         _objectId = objectId;
         _buffStatus = new BuffStatus(_param);
+        _buffStatus.StatusLog("_buffStatus");
         Debug.Log(_buffStatus);
     }
 

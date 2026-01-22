@@ -17,6 +17,6 @@ MonoBehaviour:
   _staticInterval: 0
   _param:
     AddAttack: 5
-    MultipleAttack: 1
+    MultipleAttack: 0
     AddSpeed: 0
     MultipleSpeed: 10

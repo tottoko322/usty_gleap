@@ -32,8 +32,10 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     // Update is called once per frame
     void Update()
     {
-        ApplyBuff();
-        ApplyEffect();
+        UpdateBuffs(Time.deltaTime);
+        RecalculateBuffStatus();
+        UpdateEffects(Time.deltaTime);
+        TriggerEffects();
     }
 
     public BaseStatus BaseStatus => baseStatus;
@@ -41,40 +43,46 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     public BuffStatus TemporaryBuffStatus => temporaryBuffStatus;
 
     //バフの処理
-    public void ApplyBuff()
+    public void UpdateBuffs(float deltaTime)
     {
-        BuffStatus resultBuffStatus = new BuffStatus(buffStatus);
-        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
-        // buffの数が0であればそもそも処理しない
-        if(buffs.Count <= 0) return;
-        // BuffStatusを合算
-        foreach (Buff buff in buffs)
+        for (int i = buffs.Count - 1; i >= 0; i--)
         {
-            // buffのIntervalが0よりも大きければ処理を飛ばす。
-            if(buff.GetInterval() > 0) continue;
-            // 各バフの BuffStatus をコピーしてからマージ
-            var buffStatusCopy = new BuffStatus(buff.GetBuffStatus());
-            resultBuffStatus = resultBuffStatus.Merged(buffStatusCopy);
+            Buff buff = buffs[i];
+
+            buff.ChangeDuration(-deltaTime);
+            buff.ChangeInterval(-deltaTime);
+
+            if (buff.GetDuration() <= 0)
+            {
+                buffs.RemoveAt(i);
+            }
         }
-        temporaryBuffStatus = new BuffStatus(resultBuffStatus);
-        // 各バフはtemporaryを直接操作
-        foreach(Buff buff in buffs)
-        {
-            // buffのIntervalが0よりも大きければ処理を飛ばす。
-            if(buff.GetInterval() > 0) continue;
-            buff.EmbedBuff(temporaryBuffStatus);
-            // 各バフのIntervalをリセットする。
-            float buffStaticInterval = buff.GetStaticInterval();
-            buff.SetInterval(buffStaticInterval);
-        }
-        foreach (Buff buff in buffs)
-        {
-            // DurationとIntervalの値を減らす。
-            buff.ChangeDuration(-Time.deltaTime);
-            buff.ChangeInterval(-Time.deltaTime);
-        }
-        buffs.RemoveAll(buff => buff.GetDuration() <= 0);
     }
+
+    public void RecalculateBuffStatus()
+    {
+        // ベースステータスをコピー
+        temporaryBuffStatus.CopyFrom(BuffStatus);
+
+        // ステータス合算
+        foreach (Buff buff in buffs)
+        {
+            if (buff.GetInterval() > 0) continue;
+            temporaryBuffStatus.Merge(buff.GetBuffStatus());
+        }
+
+        // 各Buffにtemporaryを埋め込む & Intervalリセット
+        foreach (Buff buff in buffs)
+        {
+            if (buff.GetInterval() > 0) continue;
+
+            buff.EmbedBuff(temporaryBuffStatus);
+
+            // 発動したBuffのIntervalをリセット
+            buff.SetInterval(buff.GetStaticInterval());
+        }
+    }
+
     public void AddBuff(Buff buff)
     {
         // buffsがnullの場合は初期化されていないため、スキップ
@@ -92,30 +100,36 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     }
 
     //エフェクトの処理
-    public void ApplyEffect()
+    public void UpdateEffects(float deltaTime)
     {
-        // effectの数が0であればそもそも処理しない
+        for (int i = effects.Count - 1; i >= 0; i--)
+        {
+            Effect effect = effects[i];
+
+            effect.ChangeDuration(-deltaTime);
+            effect.ChangeInterval(-deltaTime);
+
+            if (effect.GetDuration() <= 0)
+            {
+                effects.RemoveAt(i);
+            }
+        }
+    }
+
+    public void TriggerEffects()
+    {
         if (effects.Count == 0) return;
-        foreach(Effect effect in effects)
+
+        foreach (Effect effect in effects)
         {
-            // effectのIntervalが0よりも大きければ処理を飛ばす。
-            if(effect.GetInterval() > 0) continue;
-            // 各エフェクトの処理を行う。
+            if (effect.GetInterval() > 0) continue;
+
+            // 効果実行
             effect.CustomEffect(this);
-            // 各エフェクトのIntervalをリセットする。
-            float effectStaticInterval = effect.GetStaticInterval();
-            effect.SetInterval(effectStaticInterval);
-            Debug.Log("Duration: "+effect.GetDuration());
+
+            // クールダウンリセット
+            effect.SetInterval(effect.GetStaticInterval());
         }
-        foreach(Effect effect in effects)
-        {
-            // DurationとIntervalの値を減らす。
-            effect.ChangeDuration(-Time.deltaTime);
-            effect.ChangeInterval(-Time.deltaTime);
-            // Debug.Log("interval: "+effect.GetInterval());
-            // Debug.Log("staticInterval : "+effect.GetStaticInterval());
-        }
-        effects.RemoveAll(effect => effect.GetDuration() <= 0);
     }
     public void AddEffect(Effect effect)
     {
@@ -158,8 +172,8 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         float baseSpeed = baseStatus.BaseSpeed;
         float addSpeed = temporaryBuffStatus.AddSpeed;
         float multipleSpeed = temporaryBuffStatus.MultipleSpeed;
-        Debug.Log("GetSpeedにおいての速度："+multipleSpeed);
-        Debug.Log("あなたの速度は: "+(baseSpeed + addSpeed)*multipleSpeed);
+        // Debug.Log("GetSpeedにおいての速度："+multipleSpeed);
+        // Debug.Log("あなたの速度は: "+(baseSpeed + addSpeed)*multipleSpeed);
         return (baseSpeed + addSpeed)*multipleSpeed;
     }
 }

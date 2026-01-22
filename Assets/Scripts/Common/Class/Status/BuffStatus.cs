@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class BuffStatus
 {
     private BuffStatusParam param;
@@ -29,6 +31,30 @@ public class BuffStatus
         MultipleSpeed = value;
     }
 
+    public void CopyFrom(BuffStatus other)
+    {
+        AddAttack = other.AddAttack;
+        MultipleAttack = other.MultipleAttack;
+        AddSpeed = other.AddSpeed;
+        MultipleSpeed = other.MultipleSpeed;
+    }
+
+    public void Merge(BuffStatus other)
+    {
+        AddAttack = this.AddAttack + other.AddAttack;
+        MultipleAttack = this.MultipleAttack * other.MultipleAttack;
+        AddSpeed = this.AddSpeed + other.AddSpeed;
+        MultipleSpeed = this.MultipleSpeed * other.MultipleSpeed;
+    }
+
+    public void StatusLog(string name)
+    {
+        Debug.Log(name + "：" + "AddAttack" + AddAttack);
+        Debug.Log(name + "：" + "MultipleAttack" +MultipleAttack);
+        Debug.Log(name + "：" + "AddSpeed" +AddSpeed);
+        Debug.Log(name + "：" + "MultipleSpeed" +MultipleSpeed);
+    }
+
     //buffStatusからのコンストラクタ
     public BuffStatus(BuffStatusSO buffStatusSO)
     {
@@ -57,7 +83,10 @@ public class BuffStatus
 
     public BuffStatus(BuffStatusParam param)
     {
-        this.param = param;
+        AddAttack = param.AddAttack;
+        MultipleAttack = param.MultipleAttack;
+        AddSpeed = param.AddSpeed;
+        MultipleSpeed = param.MultipleSpeed;
     }
 
     public BuffStatus Merged(BuffStatus other)
