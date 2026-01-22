@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5321223416219411038}
   - component: {fileID: 6093996352341949534}
   m_Layer: 0
-  m_Name: BladeCenter
+  m_Name: BladeCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

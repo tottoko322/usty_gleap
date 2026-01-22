@@ -8,6 +8,7 @@ public class PlayerAction : MonoBehaviour
     private List<GameObject> hitBoxList;
     private int currentHitBoxIndex = 0;
     private InputAction fireAction;
+    private InputAction scrollAction;
     void Awake()
     {
         hitBoxHolder = gameObject.GetComponent<HitBoxHolder>();
@@ -20,9 +21,18 @@ public class PlayerAction : MonoBehaviour
             binding: "<Mouse>/leftButton" // マウス左クリック
         );
 
+        // スクロール用 InputAction(Value)
+        scrollAction = new InputAction(
+            name: "Scroll",
+            type: InputActionType.Value,
+            binding: "<Mouse>/scroll"
+        );
+
         fireAction.performed += OnFire;
+        scrollAction.performed += OnScroll;
 
         fireAction.Enable();
+        scrollAction.Enable();
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -47,5 +57,25 @@ public class PlayerAction : MonoBehaviour
 
         GameObject clone = Instantiate(hitBoxList[currentHitBoxIndex], transform.position, Quaternion.identity);
         clone.transform.up = direction; // 2Dでは上方向をベクトルに合わせる
+    }
+
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        Vector2 scroll = context.ReadValue<Vector2>();
+
+        if (scroll.y > 0)
+        {
+            currentHitBoxIndex++;
+        }
+        else if (scroll.y < 0)
+        {
+            currentHitBoxIndex--;
+        }
+
+        // 範囲制限 or ループ
+        if (currentHitBoxIndex >= hitBoxList.Count)
+            currentHitBoxIndex = 0;
+        if (currentHitBoxIndex < 0)
+            currentHitBoxIndex = hitBoxList.Count - 1;
     }
 }
