@@ -39,10 +39,10 @@ StatusActionHolderにはStatusActionを格納する。StatusActionには2パタ�
 ## BuffとEffectの設計
 バフとエフェクトは以下のように定義する。
 - **Buff**  
-Buffとは、GameObjectのBuffStatusに一時的な値の変化を与えるための要素である。一時的にBuffStatusを合算することで実装する。また、抽象クラスのBuffを継承したScriptableObjectクラスで、メソッドをoverrideすることで、支配的なBuffも適用できる。
+Buffとは、GameObjectのBuffStatusに一時的な値の変化を与えるための要素である。一時的にBuffStatusを合算することで実装する。また、抽象クラスのBuffを継承したScriptableObjectクラスのメソッドをoverrideすることで、合算後にBuffStatusを操作する支配的なBuffも適用できる。
 
 - **Effect**  
-Effectとは、GameObjectのStatusに一時的な変化を与える要素である。例えば、毒の実装では、等間隔でダメージを与えるという形で実装する。バフに対してBaseStatusへの効果と考えてほしい。
+Effectとは、GameObjectのStatusに一時的な変化を与える要素である。例えば、毒の実装では、等間隔でダメージを与えるという形で実装する。バフがBuffStatusなら、エフェクトはBaseStatusへの効果と考えてほしい。
 
 また、以下二つのルールをバフとエフェクトに適用する。
 - **同一効果には排他的である**  
