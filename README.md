@@ -4,6 +4,7 @@
 1. 設計理念について
 1. BuffとEffectの設計
 1. 操作の設計
+1. ディレクトリ構成
 ## コンセプト、ストーリー
 今回のゲームは、ダダサバイバーのような見下ろし方2Dアクションゲームをベースとして、一般的な死の概念を覆したゲームを作成する。具体的には、Playerの体力がなくなったらGAMEOVERではなく、Graveというお墓を生成してステージを進むという感じになる。  
 舞台は中世で、主人公が勇者である。
@@ -25,6 +26,15 @@ StatusActionHolderにはStatusActionを格納する。StatusActionには2パタ�
     - **SelfStatusAction**  
     自身のStatusMangerを用いた処理。  
     例） SelfStatusAction.Execute(gameObject);
+
+    - **GenerateAction**  
+    オブジェクトを生成するための処理。自分自身の位置を用いて処理。  
+    例)  GenerateAction.Execute(gameObject);
+
+以下のコンポーネントは必ずアタッチする。  
+
+<img width="304" height="68" alt="image" src="https://github.com/user-attachments/assets/9eba275e-ccae-41b4-a590-19cdd77b363e" />
+
 
 ## BuffとEffectの設計
 バフとエフェクトは以下のように定義する。
@@ -55,3 +65,7 @@ PlayerActionは以下のPC操作に対応して動作する。
 
     - **マウス(ホイール)**  
     武器の切り替え
+## ディレクトリ構成
+ディレクトリは「機能 => ファイル形式 => 意味」の順で構成する。以下に例を示す。
+
+<img width="337" height="285" alt="image" src="https://github.com/user-attachments/assets/b0764d93-db55-4621-b793-4d2cdee7660b" />
