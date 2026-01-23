@@ -20,4 +20,9 @@ public class BuffAction : TargetStatusAction
             }
         }
     }
+
+    public void SetBuffs(Buff[] newBuffs)
+    {
+        buffs = newBuffs;
+    }
 }
