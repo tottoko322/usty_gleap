@@ -1,0 +1,23 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WeaponCoreHolder : MonoBehaviour
+{
+    // Inspector でセットできるようにする場合
+    [SerializeField] private List<GameObject> weaponCoreList;
+
+    void Start()
+    {
+        // リストが null の場合は初期化
+        weaponCoreList ??= new List<GameObject>();
+    }
+
+    public List<GameObject> GetWeaponCoreList(){
+        return weaponCoreList;
+    }
+
+    public void AddWeaponCore(GameObject weaponCore)
+    {
+        weaponCoreList.Add(weaponCore);
+    }
+}

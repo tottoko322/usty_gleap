@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // [CreateAssetMenu(fileName = "TargetStatusAction", menuName = "Scriptable Objects/TargetStatusAction")]

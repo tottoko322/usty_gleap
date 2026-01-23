@@ -4,19 +4,19 @@ using  UnityEngine.InputSystem;
 
 public class PlayerAction : MonoBehaviour
 {
-    private HitBoxHolder hitBoxHolder;
-    private List<GameObject> hitBoxList;
+    private WeaponCoreHolder weaponCoreHolder;
+    private List<GameObject> weaponCoreList;
     private GraveHolder graveHolder;
     private List<GameObject> graves;
-    private int currentHitBoxIndex = 0;
+    private int currentWeaponCoreIndex = 0;
     private InputAction fireAction;
     private InputAction scrollAction;
     private InputAction spaceAction;
     private bool isDestroyed = false;
     void Awake()
     {
-        hitBoxHolder = gameObject.GetComponent<HitBoxHolder>();
-        hitBoxList = hitBoxHolder.GetHitBoxList();
+        weaponCoreHolder = gameObject.GetComponent<WeaponCoreHolder>();
+        weaponCoreList = weaponCoreHolder.GetWeaponCoreList();
         graveHolder = gameObject.GetComponent<GraveHolder>();
         graves = graveHolder.GetGraves();
 
@@ -56,6 +56,8 @@ public class PlayerAction : MonoBehaviour
         if (isDestroyed) return;
         // クリックが押されたときだけ処理
         if (!context.performed) return;
+        // 武器がなければ処理しない
+        if (weaponCoreList.Count == 0) return;
 
         // マウス座標をスクリーン空間で取得
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
@@ -72,7 +74,7 @@ public class PlayerAction : MonoBehaviour
         // 自分→マウス方向のベクトル
         Vector3 direction = -(mouseWorldPos - myPos).normalized;
 
-        GameObject clone = Instantiate(hitBoxList[currentHitBoxIndex], transform.position, Quaternion.identity);
+        GameObject clone = Instantiate(weaponCoreList[currentWeaponCoreIndex], transform.position, Quaternion.identity);
         clone.transform.SetParent(transform);
         clone.transform.up = direction; // 2Dでは上方向をベクトルに合わせる
     }
@@ -80,28 +82,34 @@ public class PlayerAction : MonoBehaviour
     public void OnScroll(InputAction.CallbackContext context)
     {
         if (isDestroyed) return;
+        // 武器がなければ処理しない
+        if (weaponCoreList.Count == 0) return;
         Vector2 scroll = context.ReadValue<Vector2>();
 
         if (scroll.y > 0)
         {
-            currentHitBoxIndex++;
+            currentWeaponCoreIndex++;
         }
         else if (scroll.y < 0)
         {
-            currentHitBoxIndex--;
+            currentWeaponCoreIndex--;
         }
 
         // 範囲制限 or ループ
-        if (currentHitBoxIndex >= hitBoxList.Count)
-            currentHitBoxIndex = 0;
-        if (currentHitBoxIndex < 0)
-            currentHitBoxIndex = hitBoxList.Count - 1;
+        if (currentWeaponCoreIndex >= weaponCoreList.Count)
+            currentWeaponCoreIndex = 0;
+        if (currentWeaponCoreIndex < 0)
+            currentWeaponCoreIndex = weaponCoreList.Count - 1;
     }
 
     public void OnSpace(InputAction.CallbackContext context)
     {
         if (isDestroyed) return;
         if (!context.performed) return;
+        if (graves.Count == 0) {
+            DestroyMe();
+            return;
+        };
 
         // 自分の位置に生成
         Instantiate(graves[0], transform.position, Quaternion.identity);
