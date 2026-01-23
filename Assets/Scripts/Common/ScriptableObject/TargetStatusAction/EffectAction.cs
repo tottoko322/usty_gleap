@@ -19,4 +19,9 @@ public class EffectAction : TargetStatusAction
             }
         }
     }
+
+    public void SetEffects(Effect[] newEffects)
+    {
+        effects = newEffects;
+    }
 }

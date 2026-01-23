@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 5f;
+    private StatusManager statusManager;
+    private float speed;
 
     private Vector2 moveInput;
 
-    // “ü—Í’l‚ð“n‚·
+    // ï¿½ï¿½ï¿½Í’lï¿½ï¿½nï¿½ï¿½
     public void SetMoveInput(Vector2 input) => moveInput = input;
 
-    // Update‚©‚çŒÄ‚Ô
+    void Start()
+    {
+        statusManager = GetComponent<StatusManager>();
+    }
+
+    // Updateï¿½ï¿½ï¿½ï¿½Ä‚ï¿½
     public void TickMove()
     {
         Vector3 movement = new Vector3(moveInput.x, moveInput.y, 0f);
+        speed = statusManager.GetSpeed();
         transform.position += movement * speed * Time.deltaTime;
     }
 }
