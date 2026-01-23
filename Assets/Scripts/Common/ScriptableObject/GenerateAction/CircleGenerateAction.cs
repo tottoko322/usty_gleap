@@ -9,7 +9,7 @@ public class CircleGenerateAction : GenerateAction
     [Min(2f)]
     [SerializeField] private int _count;
     [SerializeField] private GameObject _objectToGenerate;
-    public override void Generate(GameObject user)
+    public override void Execute(GameObject user)
     {
         for(int i = 0; i < _count; i++)
         {
