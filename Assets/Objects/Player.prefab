@@ -279,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222e7c3b9da1d2046b12064ef7bc80d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  speed: 5
 --- !u!114 &6212091347092764909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +306,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d595f8773853794883f74079e294d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraveHolder
-  graves:
-  - {fileID: 2541214235751769276, guid: 730e02243077ead4081c5e195b435554, type: 3}
-  - {fileID: 2541214235751769276, guid: 0c6aadb48bb8a694aa5fb35c76afbf52, type: 3}
-  - {fileID: 2541214235751769276, guid: 730e02243077ead4081c5e195b435554, type: 3}
+  graves: []

@@ -102,6 +102,10 @@ public class PlayerAction : MonoBehaviour
     {
         if (isDestroyed) return;
         if (!context.performed) return;
+        if (graves.Count == 0) {
+            DestroyMe();
+            return;
+        };
 
         // 自分の位置に生成
         Instantiate(graves[0], transform.position, Quaternion.identity);
