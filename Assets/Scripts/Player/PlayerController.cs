@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
     private PlayerInputActions inputActions;
 
     private PlayerMove playerMove;
-    private PlayerAction playerAction;
 
     void Awake()
     {
@@ -16,7 +15,6 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
 
         // 分離したコンポーネントを取得
         playerMove = GetComponent<PlayerMove>();
-        playerAction = GetComponent<PlayerAction>();
     }
 
     void OnEnable()
@@ -42,11 +40,5 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
     {
         // 移動担当に処理を委譲
         if (playerMove != null) playerMove.TickMove();
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (playerAction != null)
-            playerAction.HandleCollision(other.gameObject);
     }
 }
