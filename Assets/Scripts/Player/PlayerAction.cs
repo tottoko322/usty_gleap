@@ -12,6 +12,7 @@ public class PlayerAction : MonoBehaviour
     private InputAction fireAction;
     private InputAction scrollAction;
     private InputAction spaceAction;
+    private bool isDestroyed = false;
     void Awake()
     {
         hitBoxHolder = gameObject.GetComponent<HitBoxHolder>();
@@ -52,6 +53,7 @@ public class PlayerAction : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
+        if (isDestroyed) return;
         // クリックが押されたときだけ処理
         if (!context.performed) return;
 
@@ -77,6 +79,7 @@ public class PlayerAction : MonoBehaviour
 
     public void OnScroll(InputAction.CallbackContext context)
     {
+        if (isDestroyed) return;
         Vector2 scroll = context.ReadValue<Vector2>();
 
         if (scroll.y > 0)
@@ -97,12 +100,20 @@ public class PlayerAction : MonoBehaviour
 
     public void OnSpace(InputAction.CallbackContext context)
     {
+        if (isDestroyed) return;
         if (!context.performed) return;
 
         // 自分の位置に生成
         Instantiate(graves[0], transform.position, Quaternion.identity);
 
         // 自分を破壊
+        DestroyMe();
+    }
+
+    public void DestroyMe()
+    {
+        if (isDestroyed) return;
+        isDestroyed = true;
         Destroy(gameObject);
     }
 }

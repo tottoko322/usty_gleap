@@ -23,6 +23,7 @@ public class EnemyFollow : MonoBehaviour
   {
     speed = statusManager.GetSpeed();
     if (player == null || isGameOver){
+      player = GameObject.FindWithTag("Player").transform;
       return;
     }
 
