@@ -4,6 +4,7 @@ public class StatusActionHolder : MonoBehaviour
 {
     [SerializeField] private SelfStatusAction[] selfActions;
     [SerializeField] private TargetStatusAction[] targetActions;
+    [SerializeField] private GenerateAction[] generateActions;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,7 +16,7 @@ public class StatusActionHolder : MonoBehaviour
     {
         
     }
-
+    // indexで取得
     public SelfStatusAction GetSelfStatusActionFromIndex(int index)
     {
         return selfActions[index];
@@ -25,7 +26,12 @@ public class StatusActionHolder : MonoBehaviour
     {
         return targetActions[index];
     }
-    // 名前で SelfStatusAction を取得
+
+    public GenerateAction GetGenerateActionFromIndex(int index)
+    {
+        return generateActions[index];
+    }
+    // 名前で取得
     public SelfStatusAction GetSelfStatusActionFromName(string actionName)
     {
         foreach (var action in selfActions)
@@ -37,7 +43,7 @@ public class StatusActionHolder : MonoBehaviour
         return null;
     }
 
-    // 名前で TargetStatusAction を取得
+
     public TargetStatusAction GetTargetStatusActionFromName(string actionName)
     {
         foreach (var action in targetActions)
@@ -46,6 +52,17 @@ public class StatusActionHolder : MonoBehaviour
                 return action;
         }
         Debug.LogWarning($"TargetStatusAction \"{actionName}\" が見つかりませんでした");
+        return null;
+    }
+
+    public GenerateAction GetGenerateActionFromName(string actionName)
+    {
+        foreach (var action in generateActions)
+        {
+            if (action.name == actionName)
+                return action;
+        }
+        Debug.LogWarning($"generateAction \"{actionName}\" が見つかりませんでした");
         return null;
     }
 }
