@@ -46,5 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Emitter
   waves:
   - {fileID: 4505918863372424729, guid: 03b4ff1d31abf7f46876c58e69a04ec2, type: 3}
+  - {fileID: 4505918863372424729, guid: 03b4ff1d31abf7f46876c58e69a04ec2, type: 3}
+  - {fileID: 4505918863372424729, guid: 03b4ff1d31abf7f46876c58e69a04ec2, type: 3}
+  - {fileID: 4505918863372424729, guid: 03b4ff1d31abf7f46876c58e69a04ec2, type: 3}
   limitRemainingEnemies: 2
   allWaveFinish: 0

@@ -6,13 +6,18 @@ public class PlayerAction : MonoBehaviour
 {
     private HitBoxHolder hitBoxHolder;
     private List<GameObject> hitBoxList;
+    private GraveHolder graveHolder;
+    private List<GameObject> graves;
     private int currentHitBoxIndex = 0;
     private InputAction fireAction;
     private InputAction scrollAction;
+    private InputAction spaceAction;
     void Awake()
     {
         hitBoxHolder = gameObject.GetComponent<HitBoxHolder>();
         hitBoxList = hitBoxHolder.GetHitBoxList();
+        graveHolder = gameObject.GetComponent<GraveHolder>();
+        graves = graveHolder.GetGraves();
 
         // 攻撃用 InputAction(Button)
         fireAction = new InputAction(
@@ -21,6 +26,9 @@ public class PlayerAction : MonoBehaviour
             binding: "<Mouse>/leftButton" // マウス左クリック
         );
 
+        fireAction.performed += OnFire;
+        fireAction.Enable();
+
         // スクロール用 InputAction(Value)
         scrollAction = new InputAction(
             name: "Scroll",
@@ -28,11 +36,18 @@ public class PlayerAction : MonoBehaviour
             binding: "<Mouse>/scroll"
         );
 
-        fireAction.performed += OnFire;
         scrollAction.performed += OnScroll;
-
-        fireAction.Enable();
         scrollAction.Enable();
+
+        // スペースキー用 InputAction(Button)
+        spaceAction = new InputAction(
+            name: "Space",
+            type: InputActionType.Button,
+            binding: "<Keyboard>/space"
+        );
+
+        spaceAction.performed += OnSpace;
+        spaceAction.Enable();
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -56,6 +71,7 @@ public class PlayerAction : MonoBehaviour
         Vector3 direction = -(mouseWorldPos - myPos).normalized;
 
         GameObject clone = Instantiate(hitBoxList[currentHitBoxIndex], transform.position, Quaternion.identity);
+        clone.transform.SetParent(transform);
         clone.transform.up = direction; // 2Dでは上方向をベクトルに合わせる
     }
 
@@ -77,5 +93,16 @@ public class PlayerAction : MonoBehaviour
             currentHitBoxIndex = 0;
         if (currentHitBoxIndex < 0)
             currentHitBoxIndex = hitBoxList.Count - 1;
+    }
+
+    public void OnSpace(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        // 自分の位置に生成
+        Instantiate(graves[0], transform.position, Quaternion.identity);
+
+        // 自分を破壊
+        Destroy(gameObject);
     }
 }
