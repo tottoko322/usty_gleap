@@ -42,9 +42,9 @@ public class BuffStatus
     public void Merge(BuffStatus other)
     {
         AddAttack = this.AddAttack + other.AddAttack;
-        MultipleAttack = this.MultipleAttack * other.MultipleAttack;
+        MultipleAttack = this.MultipleAttack + other.MultipleAttack;
         AddSpeed = this.AddSpeed + other.AddSpeed;
-        MultipleSpeed = this.MultipleSpeed * other.MultipleSpeed;
+        MultipleSpeed = this.MultipleSpeed + other.MultipleSpeed;
     }
 
     public void StatusLog(string name)
