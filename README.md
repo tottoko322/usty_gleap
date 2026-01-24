@@ -68,4 +68,14 @@ PlayerActionは以下のPC操作に対応して動作する。
 ## ディレクトリ構成
 ディレクトリは「機能 => ファイル形式 => 意味」の順で構成する。以下に例を示す。
 
-<img width="337" height="285" alt="image" src="https://github.com/user-attachments/assets/b0764d93-db55-4621-b793-4d2cdee7660b" />
+<img width="332" height="637" alt="image" src="https://github.com/user-attachments/assets/0aa4b000-f3e1-4bd5-b30d-82b74749e548" />
+
+上の場合、機能として最低限分解したディレクトリ構成は以下のようになる。  
+
+<img width="255" height="235" alt="image" src="https://github.com/user-attachments/assets/654a08b7-6ce1-4aa9-b59f-044c9143b222" />
+
+- ### 機能の分類例  
+  - キャラクター  
+   Player、Enemy、Grave、Item
+  - システム  
+   WaveSystem、Spawner
