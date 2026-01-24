@@ -110,6 +110,7 @@ MonoBehaviour:
   selfActions: []
   targetActions:
   - {fileID: 11400000, guid: c3f61ee904d680444a7e438308370e67, type: 2}
+  generateActions: []
 --- !u!114 &6548240102567499106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,4 +187,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraveItemBehaviour
   graves:
-  - {fileID: 6248876079543078588}
+  - {fileID: 2541214235751769276, guid: 730e02243077ead4081c5e195b435554, type: 3}
