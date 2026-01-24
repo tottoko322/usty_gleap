@@ -18,7 +18,7 @@ ScriptableObjectを利用して、オブジェクトごとにStatusを作成
 Statusを有するすべてのGameObjectにアタッチするコンポーネント。Statusを用いた計算ルールを実装する。取得には(baseStatus + addStatus)*multipleStatusのように式構造によって計算・出力し、ダメージや回復の計算も行う。また、バフやエフェクトの適用も行う。
 
 - **StatusActionHolderの役割**  
-StatusActionHolderにはStatusActionを格納する。StatusActionには2パターンあり、TargetStatusActionとSelfStatusActionである。
+StatusActionHolderにはStatusActionを格納する。StatusActionには３パターンあり、TargetStatusActionとSelfStatusActionとGenerateActionである。
     - **TargetStatusAction**  
     自身のStatusManagerから必要な値の取得、相手のStatusMangerから値変更メソッドを使い、Statusを変更。  
     例） TargetStatusAction.Execute(gameObject, other.gameObject);
