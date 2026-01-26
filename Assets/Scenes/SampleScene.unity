@@ -361,7 +361,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -646,6 +646,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8210177318117711213, guid: 66bab930ee6d03e49a4d56c6cde7a306, type: 3}
+      propertyPath: allWaveFinish
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210177318117711213, guid: 66bab930ee6d03e49a4d56c6cde7a306, type: 3}
+      propertyPath: waves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210177318117711213, guid: 66bab930ee6d03e49a4d56c6cde7a306, type: 3}
+      propertyPath: 'waves.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8733485613607535618, guid: 9aa4bbfa7c534634c8868bcc64066bfc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -722,11 +734,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9003944597478631060, guid: 3e8d0fa12e987d6499120557e3bce735, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.91
+      value: -8.05
       objectReference: {fileID: 0}
     - target: {fileID: 9003944597478631060, guid: 3e8d0fa12e987d6499120557e3bce735, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.28
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 9003944597478631060, guid: 3e8d0fa12e987d6499120557e3bce735, type: 3}
       propertyPath: m_LocalPosition.z
