@@ -36,6 +36,19 @@ StatusActionHolderにはStatusActionを格納する。StatusActionには３パ�
 
 <img width="304" height="68" alt="image" src="https://github.com/user-attachments/assets/9eba275e-ccae-41b4-a590-19cdd77b363e" />
 
+また、StatusHolderには以下のBaseStatusとBuffStatusをCreate/Statusから作成し、インスペクターにドロップする。基本的にはオブジェクトごとに作るが、Statusを共有したい場合は同じStatusを入れてもいい。
+
+<img width="431" height="61" alt="image" src="https://github.com/user-attachments/assets/0fcba4b4-8438-4db5-8950-5de9806ecb9b" />
+<img width="593" height="164" alt="image" src="https://github.com/user-attachments/assets/e0100c16-ccf1-46d2-8f81-25c9806ef6de" />
+
+StatusActionHolderにはCreate/TargetStatusAction、SelfStatusAction、GenerateActionのいずれかを作成してセットする。Actionの中にはインスペクターで値を指定しなくてもいいものもあるので、その場合は共通のアクションを用いる。
+
+<img width="245" height="193" alt="image" src="https://github.com/user-attachments/assets/82beb32a-b528-4440-a418-6f2ff88809fe" />
+<img width="432" height="280" alt="image" src="https://github.com/user-attachments/assets/042addd5-4970-4f5e-b78b-f6fb11285627" />
+
+
+
+
 
 ## BuffとEffectの設計
 バフとエフェクトは以下のように定義する。
