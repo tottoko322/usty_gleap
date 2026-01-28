@@ -3,7 +3,6 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] private float lifeTimeSeconds = 5f; // 生存時間（秒）
-    
     private StatusActionHolder statusActionHolder;
     private StatusManager statusManager;
     private TargetStatusAction attackAction;
