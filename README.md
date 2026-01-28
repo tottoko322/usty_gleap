@@ -5,9 +5,11 @@
 1. BuffとEffectの設計
 1. 操作の設計
 1. ディレクトリ構成
+1. PlayerManagerの実装（後で作る）
+1. 実行プロセスの集約化
 ## コンセプト、ストーリー
 今回のゲームは、ダダサバイバーのような見下ろし方2Dアクションゲームをベースとして、一般的な死の概念を覆したゲームを作成する。具体的には、Playerの体力がなくなったらGAMEOVERではなく、Graveというお墓を生成してステージを進むという感じになる。  
-舞台は中世で、主人公が勇者である。
+舞台は中世で、主人公は勇者である。
 ## 設計理念について
 今回の開発では、すべてGameObjectにStatusHolder、StatusActionHolder、StatusManagerをアタッチすることによって、共通した汎用性の高い実装を試みた。目的としてはEnemyもPlayerもGraveも同じようにStatusのやり取りをできるようにすることで、多種多様なゲーム実装を可能にするためだ。
 - **StatusHolderの役割**  
@@ -34,6 +36,19 @@ StatusActionHolderにはStatusActionを格納する。StatusActionには３パ�
 以下のコンポーネントは必ずアタッチする。  
 
 <img width="304" height="68" alt="image" src="https://github.com/user-attachments/assets/9eba275e-ccae-41b4-a590-19cdd77b363e" />
+
+また、StatusHolderには以下のBaseStatusとBuffStatusをCreate/Statusから作成し、インスペクターにドロップする。基本的にはオブジェクトごとに作るが、Statusを共有したい場合は同じStatusを入れてもいい。
+
+<img width="431" height="61" alt="image" src="https://github.com/user-attachments/assets/0fcba4b4-8438-4db5-8950-5de9806ecb9b" />
+<img width="593" height="164" alt="image" src="https://github.com/user-attachments/assets/e0100c16-ccf1-46d2-8f81-25c9806ef6de" />
+
+StatusActionHolderにはCreate/TargetStatusAction、SelfStatusAction、GenerateActionのいずれかを作成してセットする。Actionの中にはインスペクターで値を指定しなくてもいいものもあるので、その場合は共通のアクションを用いる。
+
+<img width="245" height="193" alt="image" src="https://github.com/user-attachments/assets/82beb32a-b528-4440-a418-6f2ff88809fe" />
+<img width="432" height="280" alt="image" src="https://github.com/user-attachments/assets/042addd5-4970-4f5e-b78b-f6fb11285627" />
+
+
+
 
 
 ## BuffとEffectの設計
@@ -79,3 +94,6 @@ PlayerActionは以下のPC操作に対応して動作する。
    Player、Enemy、Grave、Item
   - システム  
    WaveSystem、Spawner
+
+## 実行プロセスの集約化
+　おそらくフレームごとの実装にはUpdate、一定時間の間隔での実装にはCoroutineを使っているが、各クラスに定義すると並列で処理しなければならないのでオーバーヘッドが増えて、オブジェクトの数だけ負荷が増加する。そのために、UpdateとCoroutineを実行するのは一か所にして、繰り返し処理をしたいオブジェクトはそこに関数を登録する形で処理する。
