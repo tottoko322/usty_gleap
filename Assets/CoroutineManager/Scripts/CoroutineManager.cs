@@ -41,10 +41,18 @@ public class CoroutineManager : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < coroutines.Count; i++)
+            // null のオブジェクトは除外
+            for (int i = coroutines.Count - 1; i >= 0; i--)
             {
+                if (coroutines[i] == null)
+                {
+                    coroutines.RemoveAt(i);
+                    continue;
+                }
+
                 coroutines[i].ManagedCoroutine(interval);
             }
+
             yield return new WaitForSeconds(interval);
         }
     }
