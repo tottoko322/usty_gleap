@@ -45,6 +45,7 @@ public class BaritoneEnemyBehaviour : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
 
         if(distance > stopDistance){
+            Debug.Log("バリトンのスピード" + speed);
         //方向に向かって移動
         transform.position += direction * speed * Time.deltaTime;
         }

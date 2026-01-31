@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aafdf13b584e544dac4a4c1e6d8af15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoroutineManager
-  interval: 1
+  interval: 0.1

@@ -5,12 +5,12 @@ public class PlazmaOrbitBehaviour : MonoBehaviour
     [Header("Effect Settings")]
     [SerializeField] private Effect stunEffect;
     private StatusActionHolder _statusActionHolder;
-    private TargetStatusAction _plazmaAction;
+    private TargetStatusAction _attackAction;
 
     void Awake()
     {
         _statusActionHolder = GetComponent<StatusActionHolder>();
-        _plazmaAction = _statusActionHolder.GetTargetStatusActionFromIndex(0);
+        _attackAction = _statusActionHolder.GetTargetStatusActionFromIndex(0);
     }
 
     void Update()
@@ -23,7 +23,7 @@ public class PlazmaOrbitBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             GameObject enemy = collision.gameObject;
-            _plazmaAction.Execute(this.gameObject, enemy);
+            _attackAction.Execute(this.gameObject, enemy);
 
             // Stun effect application
             ApplyStunEffect(enemy);
@@ -42,7 +42,7 @@ public class PlazmaOrbitBehaviour : MonoBehaviour
                 Effect effectCopy = Instantiate(stunEffect);
                 effectCopy.Initialize(gameObject.GetInstanceID());
                 statusManager.AddEffect(effectCopy);
-            
+
                 Debug.Log($"{enemy.name}にStunEffectを適用しました");
             }
         }
