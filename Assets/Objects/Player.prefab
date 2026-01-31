@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 790223823070352886}
   - component: {fileID: 6212091347092764909}
   - component: {fileID: 7363608004334717130}
+  - component: {fileID: 5216692051697576548}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -243,6 +244,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdf24047eddca71449ac910d29fd901c, type: 2}
   - {fileID: 11400000, guid: f5d9e77b533b1ed409a1dd896731ff8d, type: 2}
   - {fileID: 11400000, guid: 2158732e09753644b9911eb9a4ff6590, type: 2}
+  generateActions: []
 --- !u!114 &5552622525564400355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,9 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863006a3f36487d4092ecd966afe3efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitBoxHolder
-  hitBoxList:
-  - {fileID: 4767183409975778884, guid: 9df8fef4ad66ab84fab688a22c4ef1aa, type: 3}
-  - {fileID: 4889668759395069669, guid: 378fe1b8e94309740843ee9532e7dbc2, type: 3}
+  weaponCoreList: []
 --- !u!114 &7363608004334717130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,3 +307,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraveHolder
   graves: []
+--- !u!114 &5216692051697576548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582109014948741588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc4b4cf2b0bca84da4e27f7e201e115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLifecycle
