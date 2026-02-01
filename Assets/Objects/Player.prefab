@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraveHolder
   graves: []
+  playerGravesData: {fileID: 11400000, guid: a30418bfc19dde64f9894322194fcecb, type: 2}
 --- !u!114 &5216692051697576548
 MonoBehaviour:
   m_ObjectHideFlags: 0

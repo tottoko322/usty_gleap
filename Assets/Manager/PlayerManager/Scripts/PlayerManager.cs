@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -6,10 +7,12 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance { get; private set; }
 
     public Transform CurrentPlayer { get; private set; }
+    public PlayerGraves playerGravesData;
     public event Action<Transform> OnPlayerChanged;
 
     void Awake()
     {
+            Debug.Log($"[PM] Awake {name} SO={playerGravesData}", this);
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -33,5 +36,10 @@ public class PlayerManager : MonoBehaviour
 
         CurrentPlayer = null;
         OnPlayerChanged?.Invoke(null);
+    }
+
+    public List<GameObject> GetPlayerGravesData()
+    {
+        return playerGravesData.graves;
     }
 }
