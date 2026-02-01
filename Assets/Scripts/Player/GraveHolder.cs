@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class GraveHolder : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> graves;
+    private List<GameObject> graves;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // リストが null の場合は初期化
-        graves ??= new List<GameObject>();
+        graves = PlayerManager.Instance.GetPlayerGravesData();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -19,6 +19,15 @@ public class GraveHolder : MonoBehaviour
 
     public List<GameObject> GetGraves(){
         return graves;
+    }
+
+    public void RemoveFirstGrave()
+    {
+        Debug.Log("お墓の数は" + graves.Count);
+        if (graves.Count > 0)
+        {
+            graves.RemoveAt(0);
+        }
     }
 
     public void AddGrave(GameObject grave)

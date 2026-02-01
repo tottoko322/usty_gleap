@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882b855cb7dcf9549a9cbe5ccb76ea9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  playerGravesData: {fileID: 11400000, guid: a30418bfc19dde64f9894322194fcecb, type: 2}

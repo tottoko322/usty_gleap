@@ -19,4 +19,4 @@ MonoBehaviour:
     AddAttack: 5
     MultipleAttack: 0
     AddSpeed: 0
-    MultipleSpeed: 10
+    MultipleSpeed: 0
