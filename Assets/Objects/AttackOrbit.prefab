@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5477872408511448088}
   - component: {fileID: 7791809887306708269}
   - component: {fileID: 2813723120047858998}
+  - component: {fileID: 6301186317830756754}
   m_Layer: 0
   m_Name: AttackOrbit
   m_TagString: Untagged
@@ -111,6 +112,7 @@ MonoBehaviour:
   selfActions: []
   targetActions:
   - {fileID: 11400000, guid: cdf24047eddca71449ac910d29fd901c, type: 2}
+  generateActions: []
 --- !u!114 &47939549968819051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,3 +227,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941f480702be1814baecf47552657db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackOrbitBehaviour
+--- !u!114 &6301186317830756754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3706849120274916178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11db4487ad2c0b49b373c4631f35648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackOrbitBehaviour
