@@ -3,45 +3,47 @@ using UnityEngine.SceneManagement;
 
 public class GameClearManager : MonoBehaviour
 {
-    [Header("参照設定")]
-    [SerializeField] private Emitter emitter;
-    [SerializeField] private GameObject clearUI;
-
-    [Header("タイトルシーンの名前")]
-    [SerializeField] private string titleSceneName = "TitleScene";
+    private Emitter emitter;
+    [SerializeField] private GameObject clearUI; // クリア時に表示するパネル
+    [SerializeField] private string titleSceneName = "TitleScene"; // タイトルシーンの名前
 
     private bool isCleared = false;
 
     void Start()
     {
+        // 1. "WaveManager" という名前のオブジェクトを探す
+        GameObject managerObj = GameObject.Find("WaveManager");
+
+        if (managerObj != null)
+        {
+            // 2. その中にある Emitter スクリプトを取得する
+            emitter = managerObj.GetComponent<Emitter>();
+        }
+
+        // 初期状態ではクリアUIを隠しておく
         if (clearUI != null)
         {
             clearUI.SetActive(false);
-        }
-
-        if (emitter == null)
-        {
-            emitter = FindObjectOfType<Emitter>();
         }
     }
 
     void Update()
     {
-        // まだクリアしていない場合：クリア判定を行う
+        // もし WaveManager（emitter）が見つかっていないなら、これ以降の処理をしない
+        if (emitter == null) return; 
+    
         if (!isCleared)
         {
-            if (emitter != null && emitter.allWaveFinish)
+            if (emitter.allWaveFinish)
             {
                 if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
                 {
-                    ExecuteGameClear();
+                    ShowGameClear();
                 }
             }
         }
         else
         {
-            // クリア済みの（画面が暗い）場合：スペースキー入力を監視
-            // 前回の「Input System」の設定を「Both」にしていれば、この書き方で動きます
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 BackToTitle();
@@ -49,15 +51,16 @@ public class GameClearManager : MonoBehaviour
         }
     }
 
-    private void ExecuteGameClear()
+    private void ShowGameClear()
     {
         isCleared = true;
         if (clearUI != null)
         {
-            clearUI.SetActive(true);
+            clearUI.SetActive(true); // パネルを表示して画面を暗くする
         }
     }
 
+    // ボタンとスペースキー両方から呼ばれるタイトル遷移処理
     public void BackToTitle()
     {
         SceneManager.LoadScene(titleSceneName);
