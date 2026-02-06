@@ -95,5 +95,25 @@ PlayerActionは以下のPC操作に対応して動作する。
   - システム  
    WaveSystem、Spawner
 
+## PlayerManagerの実装
+PlayerManagerをシーン上に配置し、Playerが自身の存在を登録・解除、他のオブジェクトがPlayerManagerを通してオブジェクトの存在を取得することで、Findtagなどの重い処理を回避する。  
+1. **PlayerManagerをシーンのHierarchyに配置する**
+<img width="283" height="43" alt="image" src="https://github.com/user-attachments/assets/f8e07f17-d72f-439c-918e-af996aba4cc7" />
+
+1. **PlayerManagerのインスタンスを取得してPlayerをセット（例）**
+```csharp
+    private Transform player;
+
+    ///他の処理
+
+    private void SetPlayer(){
+        if (player == null){
+          if(PlayerManager.Instance == null || PlayerManager.Instance.CurrentPlayer == null) return;
+          player = PlayerManager.Instance.CurrentPlayer;
+          return;
+        }
+    }
+```
+
 ## 実行プロセスの集約化
 　おそらくフレームごとの実装にはUpdate、一定時間の間隔での実装にはCoroutineを使っているが、各クラスに定義すると並列で処理しなければならないのでオーバーヘッドが増えて、オブジェクトの数だけ負荷が増加する。そのために、UpdateとCoroutineを実行するのは一か所にして、繰り返し処理をしたいオブジェクトはそこに関数を登録する形で処理する。
