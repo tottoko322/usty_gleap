@@ -186,12 +186,12 @@ public class StatusManager : MonoBehaviour,IHasStatusManager,ICoroutineUpdatable
 
     public float GetSpeed()
     {
+        if(this == null)return 0f;
         float baseSpeed = baseStatus.BaseSpeed;
         float addSpeed = temporaryBuffStatus.AddSpeed;
         float multipleSpeed = temporaryBuffStatus.MultipleSpeed;
-        // Debug.Log("GetSpeedにおいての速度："+multipleSpeed);
-        // Debug.Log("あなたの速度は: "+(baseSpeed + addSpeed)*multipleSpeed);
         return (baseSpeed + addSpeed)*multipleSpeed;
+        //※クリックが早すぎるとnull参照になる恐れがある。
     }
 }
 
