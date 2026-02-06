@@ -186,6 +186,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager,ICoroutineUpdatable
 
     public float GetSpeed()
     {
+        if(this == null)return 0f;
         float baseSpeed = baseStatus.BaseSpeed;
         float addSpeed = temporaryBuffStatus.AddSpeed;
         float multipleSpeed = temporaryBuffStatus.MultipleSpeed;
