@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &784465765187668276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatusActionHolder
   selfActions: []
   targetActions: []
+  generateActions: []
 --- !u!114 &-4508385274668107327
 MonoBehaviour:
   m_ObjectHideFlags: 0

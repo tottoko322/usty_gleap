@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &784465765187668276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   selfActions: []
   targetActions:
   - {fileID: 11400000, guid: 2643c20fadad22e488907fd022252da7, type: 2}
+  generateActions: []
 --- !u!114 &-4508385274668107327
 MonoBehaviour:
   m_ObjectHideFlags: 0
