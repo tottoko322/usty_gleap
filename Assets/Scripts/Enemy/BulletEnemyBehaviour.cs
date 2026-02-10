@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class BulletEnemyBehaviour : MonoBehaviour
@@ -19,7 +18,7 @@ public class BulletEnemyBehaviour : MonoBehaviour
     private StatusActionHolder statusActionHolder;
     private GenerateGrave generateGrave;
     private SelfStatusAction deathAction;
-    private Coroutine shotRoutine;
+    private float lastShotTime = -999f;
 
     void Start()
     {
@@ -30,9 +29,7 @@ public class BulletEnemyBehaviour : MonoBehaviour
         {
             deathAction = statusActionHolder.GetSelfStatusActionFromIndex(0);
         }
-
-        GameObject playerObject = GameObject.FindWithTag("Player");
-        player = playerObject != null ? playerObject.transform : null;
+        SetPlayer();
     }
 
     void Update()
@@ -44,10 +41,8 @@ public class BulletEnemyBehaviour : MonoBehaviour
 
         if (player == null || isGameOver)
         {
-            GameObject playerObject = GameObject.FindWithTag("Player");
-            if (playerObject == null) return;
-            player = playerObject.transform;
-            return;
+            SetPlayer();
+            if (player == null) return;
         }
 
         Vector3 direction = (player.position - transform.position).normalized;
@@ -106,29 +101,10 @@ public class BulletEnemyBehaviour : MonoBehaviour
 
         float dist = Vector2.Distance(transform.position, player.position);
 
-        if (dist <= fireDistance)
-        {
-            if (shotRoutine == null)
-            {
-                shotRoutine = StartCoroutine(ShotLoop());
-            }
-        }
-        else
-        {
-            if (shotRoutine != null)
-            {
-                StopCoroutine(shotRoutine);
-                shotRoutine = null;
-            }
-        }
-    }
-
-    private IEnumerator ShotLoop()
-    {
-        while (true)
+        if (dist <= fireDistance && Time.time - lastShotTime >= shotInterval)
         {
             ShotBullet();
-            yield return new WaitForSeconds(shotInterval);
+            lastShotTime = Time.time;
         }
     }
 
@@ -138,5 +114,11 @@ public class BulletEnemyBehaviour : MonoBehaviour
 
         Vector3 spawnPos = transform.position + transform.right * spawnOffset;
         Instantiate(bulletPrefab, spawnPos, transform.rotation);
+    }
+
+    private void SetPlayer()
+    {
+        if (PlayerManager.Instance == null || PlayerManager.Instance.CurrentPlayer == null) return;
+        player = PlayerManager.Instance.CurrentPlayer;
     }
 }

@@ -45,9 +45,7 @@ public class OrbitEnemyBehaviour : MonoBehaviour
         {
             deathAction = statusActionHolder.GetSelfStatusActionFromIndex(0);
         }
-
-        GameObject playerObject = GameObject.FindWithTag("Player");
-        player = playerObject != null ? playerObject.transform : null;
+        SetPlayer();
     }
 
     void Update()
@@ -59,10 +57,8 @@ public class OrbitEnemyBehaviour : MonoBehaviour
 
         if (player == null || isGameOver)
         {
-            GameObject playerObject = GameObject.FindWithTag("Player");
-            if (playerObject == null) return;
-            player = playerObject.transform;
-            return;
+            SetPlayer();
+            if (player == null) return;
         }
 
         Vector3 direction = (player.position - transform.position).normalized;
@@ -101,5 +97,11 @@ public class OrbitEnemyBehaviour : MonoBehaviour
 
             this.enabled = false;
         }
+    }
+
+    private void SetPlayer()
+    {
+        if (PlayerManager.Instance == null || PlayerManager.Instance.CurrentPlayer == null) return;
+        player = PlayerManager.Instance.CurrentPlayer;
     }
 }
