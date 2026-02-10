@@ -11,21 +11,11 @@ public class GameOverManager : MonoBehaviour
     [Header("演出設定")]
     [SerializeField] private float delaySeconds = 1.5f; // ゲームオーバー表示までの待ち時間
 
-    private RemainGrave graveScript;
-    private PlayerTracker playerTracker;
-
     private bool isProcessing = false; // 判定中フラグ
     private bool isGameOver = false;   // 画面表示済みフラグ
 
     void Start()
     {
-        // 各マネージャーからスクリプトを取得
-        GameObject gManager = GameObject.Find("GraveManager");
-        if (gManager != null) graveScript = gManager.GetComponent<RemainGrave>();
-
-        GameObject pManager = GameObject.Find("PlayerManager");
-        if (pManager != null) playerTracker = pManager.GetComponent<PlayerTracker>();
-
         if (gameOverUI != null) gameOverUI.SetActive(false);
     }
 
@@ -54,10 +44,18 @@ public class GameOverManager : MonoBehaviour
 
     private bool CheckConditions()
     {
-        bool isGraveEmpty = graveScript != null && graveScript.RemainingGrave() == 0;
-        bool isPlayerNull = playerTracker != null && playerTracker.targetPlayer == null;
+        Transform player = PlayerManager.Instance.CurrentPlayer;
+        // PlayerManagerが存在しない場合は判定しない
+        if (PlayerManager.Instance == null) return false;
 
-        return isGraveEmpty && isPlayerNull;
+        // 条件A：プレイヤーが存在しない（CurrentPlayerがnull）
+        bool isPlayerNull = player == null;
+
+        // 条件B：墓石のリストが空（数が0）
+        bool isGraveEmpty = PlayerManager.Instance.GetPlayerGravesData().Count == 0;
+
+        // 両方を満たしていれば true
+        return isPlayerNull && isGraveEmpty;
     }
 
     // 間を置くための処理
