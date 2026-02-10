@@ -5,7 +5,7 @@ using System.Collections; // コルーチンを使うために追加
 
 public class SceneChanger : MonoBehaviour
 {
-    public string mainSceneName = "MainScene";
+    public string mainSceneName = "Main Scene";
     public Image fadeImage;     // 作成したFadeImageをここに入れる
     public float fadeSpeed = 1.0f; // フェードにかかる秒数
 
