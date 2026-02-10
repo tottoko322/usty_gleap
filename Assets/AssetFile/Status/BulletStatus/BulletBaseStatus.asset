@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseStatusSO
   maxHP: 10
   baseAttack: 1
-  baseSpeed: 1
+  baseSpeed: 2
   baseDefense: 1

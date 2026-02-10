@@ -13,6 +13,16 @@ public class OrbitCenterBehaviour : MonoBehaviour
     [SerializeField] GameObject orbitChildPrefab;
     [SerializeField] GameObject centerObject;
 
+    public void SetupCenter(Transform center)
+    {
+        centerObject = center != null ? center.gameObject : null;
+        if (centerObject != null)
+        {
+            transform.position = centerObject.transform.position;
+            transform.SetParent(centerObject.transform);
+        }
+    }
+
     void Start()
     {
         if (centerObject != null)

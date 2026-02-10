@@ -41,9 +41,6 @@ public class BulletBehaviour : MonoBehaviour
         {
             // AttackActionを用いて攻撃
             attackAction.Execute(this.gameObject, collision.gameObject);
-            
-            // Bullet自身を破壊
-            DestroyBullet();
         }
     }
 
