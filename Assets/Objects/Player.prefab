@@ -212,7 +212,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1517199709914722575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,8 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d595f8773853794883f74079e294d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraveHolder
-  graves: []
-  playerGravesData: {fileID: 11400000, guid: a30418bfc19dde64f9894322194fcecb, type: 2}
 --- !u!114 &5216692051697576548
 MonoBehaviour:
   m_ObjectHideFlags: 0
