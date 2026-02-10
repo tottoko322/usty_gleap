@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
 
-public class StatusManager : MonoBehaviour,IHasStatusManager
+public class StatusManager : MonoBehaviour,IHasStatusManager,ICoroutineUpdatable
 {
     // ===== StatusHolderの参照 =====
     private StatusHolder statusHolder;
@@ -15,13 +14,14 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     private BuffStatus temporaryBuffStatus;
     private List<Buff> buffs;
     private List<Effect> effects;
-    private Coroutine loopRoutine;
 
     //インターフェースによるStatusManagerの取得
     public StatusManager Status => this;
     public BaseStatus BaseStatus => baseStatus;
     public BuffStatus BuffStatus => buffStatus;
     public BuffStatus TemporaryBuffStatus => temporaryBuffStatus;
+    //破壊後の判定
+    private bool isDestroyed = false;
     void Start()
     {
         statusHolder = GetComponent<StatusHolder>();
@@ -32,31 +32,33 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
         temporaryBuffStatus = new BuffStatus(statusHolder.GetTemporaryBuffStatus);
         buffs = statusHolder.GetBuffs;
         effects = statusHolder.GetEffects;
-        // バフとエフェクトの適用を繰り返す
-        loopRoutine = StartCoroutine(Loop(0.01f));
+    }
+
+    void OnEnable()
+    {
+        CoroutineManager.Instance.Register(this);
+    }
+
+    void OnDestroy()
+    {
+        isDestroyed = true;
+        CoroutineManager.Instance.Unregister(this);
     }
 
     // Update is called once per frame
-    void Update()
+    public void ManagedCoroutine(float interval)
     {
-    }
-
-    IEnumerator Loop(float interval)
-    {
-        while (true)
-        {
-            UpdateBuffs(interval);
-            RecalculateBuffStatus();
-            UpdateEffects(interval);
-            TriggerEffects();
-            // interval秒待つ
-            yield return new WaitForSeconds(interval);
-        }
+        if(isDestroyed)return;
+        UpdateBuffs(interval);
+        RecalculateBuffStatus();
+        UpdateEffects(interval);
+        TriggerEffects();
     }
 
     //バフの処理
     public void UpdateBuffs(float deltaTime)
     {
+        if(buffs == null)return;
         for (int i = buffs.Count - 1; i >= 0; i--)
         {
             Buff buff = buffs[i];
@@ -73,6 +75,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
 
     public void RecalculateBuffStatus()
     {
+        if(temporaryBuffStatus == null)return;
         // ベースステータスをコピー
         temporaryBuffStatus.CopyFrom(BuffStatus);
 
@@ -114,6 +117,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
     //エフェクトの処理
     public void UpdateEffects(float deltaTime)
     {
+        if(effects == null)return;
         for (int i = effects.Count - 1; i >= 0; i--)
         {
             Effect effect = effects[i];
@@ -130,6 +134,7 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
 
     public void TriggerEffects()
     {
+        if(effects == null)return;
         if (effects.Count == 0) return;
 
         foreach (Effect effect in effects)
@@ -181,12 +186,12 @@ public class StatusManager : MonoBehaviour,IHasStatusManager
 
     public float GetSpeed()
     {
+        if(this == null)return 0f;
         float baseSpeed = baseStatus.BaseSpeed;
         float addSpeed = temporaryBuffStatus.AddSpeed;
         float multipleSpeed = temporaryBuffStatus.MultipleSpeed;
-        // Debug.Log("GetSpeedにおいての速度："+multipleSpeed);
-        // Debug.Log("あなたの速度は: "+(baseSpeed + addSpeed)*multipleSpeed);
         return (baseSpeed + addSpeed)*multipleSpeed;
+        //※クリックが早すぎるとnull参照になる恐れがある。
     }
 }
 

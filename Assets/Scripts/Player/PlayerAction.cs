@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using  UnityEngine.InputSystem;
@@ -13,12 +14,11 @@ public class PlayerAction : MonoBehaviour
     private InputAction scrollAction;
     private InputAction spaceAction;
     private bool isDestroyed = false;
-    void Awake()
+    void Start()
     {
         weaponCoreHolder = gameObject.GetComponent<WeaponCoreHolder>();
         weaponCoreList = weaponCoreHolder.GetWeaponCoreList();
         graveHolder = gameObject.GetComponent<GraveHolder>();
-        graves = graveHolder.GetGraves();
 
         // 攻撃用 InputAction(Button)
         fireAction = new InputAction(
@@ -50,6 +50,30 @@ public class PlayerAction : MonoBehaviour
         spaceAction.performed += OnSpace;
         spaceAction.Enable();
     }
+    void OnDisable()
+    {
+        if (fireAction != null)
+        {
+            fireAction.performed -= OnFire;
+            fireAction.Disable();
+            fireAction.Dispose();
+        }
+
+        if (scrollAction != null)
+        {
+            scrollAction.performed -= OnScroll;
+            scrollAction.Disable();
+            scrollAction.Dispose();
+        }
+
+        if (spaceAction != null)
+        {
+            spaceAction.performed -= OnSpace;
+            spaceAction.Disable();
+            spaceAction.Dispose();
+        }
+    }
+
 
     public void OnFire(InputAction.CallbackContext context)
     {
@@ -104,15 +128,25 @@ public class PlayerAction : MonoBehaviour
 
     public void OnSpace(InputAction.CallbackContext context)
     {
+        Debug.Log($"graveHolder: {graveHolder}, graves: {graves}");
         if (isDestroyed) return;
         if (!context.performed) return;
-        if (graves.Count == 0) {
+        
+        // graves と graveHolder が初期化されているか確認
+        if (graves == null)
+        {
+            graves = graveHolder.GetGraves();
+        }
+        
+        if (graves.Count == 0)
+        {
             DestroyMe();
             return;
-        };
+        }
 
         // 自分の位置に生成
         Instantiate(graves[0], transform.position, Quaternion.identity);
+        graveHolder.RemoveFirstGrave();
 
         // 自分を破壊
         DestroyMe();
@@ -122,6 +156,12 @@ public class PlayerAction : MonoBehaviour
     {
         if (isDestroyed) return;
         isDestroyed = true;
+        StartCoroutine(DestroyNextFrame());
+    }
+
+    IEnumerator DestroyNextFrame()
+    {
+        yield return null; // 1フレーム待つ
         Destroy(gameObject);
     }
 }

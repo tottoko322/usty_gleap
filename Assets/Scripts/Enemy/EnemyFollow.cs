@@ -23,8 +23,8 @@ public class EnemyFollow : MonoBehaviour
   {
     speed = statusManager.GetSpeed();
     if (player == null || isGameOver ){
-      if(GameObject.FindWithTag("Player") == null) return;
-      player = GameObject.FindWithTag("Player").transform;
+      if(PlayerManager.Instance == null || PlayerManager.Instance.CurrentPlayer == null) return;
+      player = PlayerManager.Instance.CurrentPlayer;
       return;
     }
 
@@ -39,10 +39,10 @@ public class EnemyFollow : MonoBehaviour
     }
 
     //お墓の生成
-    if (statusManager.BaseStatus.CurrentHP <= 0)
-    {
-      generateGrave.Generate(transform.position);
-    }
+    // if (statusManager.BaseStatus.CurrentHP <= 0)
+    // {
+    //   generateGrave.Generate(transform.position);
+    // }
 
     //死の追加
     deathAction.Execute(this.gameObject);
