@@ -16,14 +16,12 @@ public class BulletEnemyBehaviour : MonoBehaviour
     private bool isGameOver = false;
     private StatusManager statusManager;
     private StatusActionHolder statusActionHolder;
-    private GenerateGrave generateGrave;
     private SelfStatusAction deathAction;
     private float lastShotTime = -999f;
 
     void Start()
     {
         statusManager = GetComponent<StatusManager>();
-        generateGrave = GetComponent<GenerateGrave>();
         statusActionHolder = GetComponent<StatusActionHolder>();
         if (statusActionHolder != null)
         {
@@ -55,14 +53,6 @@ public class BulletEnemyBehaviour : MonoBehaviour
 
         LookAtPlayer();
         HandleShootingByDistance();
-
-        if (statusManager != null && statusManager.BaseStatus.CurrentHP <= 0)
-        {
-            if (generateGrave != null)
-            {
-                generateGrave.Generate(transform.position);
-            }
-        }
 
         if (deathAction != null)
         {

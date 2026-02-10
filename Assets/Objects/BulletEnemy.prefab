@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 1287247015686621944}
   - component: {fileID: 230868669032183259}
   - component: {fileID: 3124690390612243247}
-  - component: {fileID: 575508660376311541}
   m_Layer: 0
   m_Name: BulletEnemy
   m_TagString: Enemy
@@ -229,16 +228,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatusHolder
   baseStatusSO: {fileID: 11400000, guid: 3f4339dd5cc85854caa3d43e5fe76eb4, type: 2}
   buffStatusSO: {fileID: 11400000, guid: c1042dfe0ff48a946a1e6660f8690fac, type: 2}
---- !u!114 &575508660376311541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4556183081519159654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df65303618225ba4ebb4ef2e366c9cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GenerateGrave
-  Grave: {fileID: 2541214235751769276, guid: 2b7b0627f35b80b4caec1711c20bfee9, type: 3}

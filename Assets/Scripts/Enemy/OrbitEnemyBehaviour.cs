@@ -14,7 +14,6 @@ public class OrbitEnemyBehaviour : MonoBehaviour
     private bool isGameOver = false;
     private StatusManager statusManager;
     private StatusActionHolder statusActionHolder;
-    private GenerateGrave generateGrave;
     private SelfStatusAction deathAction;
 
     void Awake()
@@ -39,7 +38,6 @@ public class OrbitEnemyBehaviour : MonoBehaviour
     void Start()
     {
         statusManager = GetComponent<StatusManager>();
-        generateGrave = GetComponent<GenerateGrave>();
         statusActionHolder = GetComponent<StatusActionHolder>();
         if (statusActionHolder != null)
         {
@@ -67,14 +65,6 @@ public class OrbitEnemyBehaviour : MonoBehaviour
         if (distance > stopDistance)
         {
             transform.position += direction * speed * Time.deltaTime;
-        }
-
-        if (statusManager != null && statusManager.BaseStatus.CurrentHP <= 0)
-        {
-            if (generateGrave != null)
-            {
-                generateGrave.Generate(transform.position);
-            }
         }
 
         if (deathAction != null)
