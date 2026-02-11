@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
 
     public Transform CurrentPlayer { get; private set; }
     public PlayerGraves playerGravesData;
+    public PlayerWeaponCores playerWeaponCoresData;
     public event Action<Transform> OnPlayerChanged;
 
     void Awake()
@@ -41,5 +42,10 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> GetPlayerGravesData()
     {
         return playerGravesData.graves;
+    }
+
+    public List<GameObject> GetPlayerWeaponCoresData()
+    {
+        return playerWeaponCoresData.weaponCores;
     }
 }

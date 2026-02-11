@@ -4,12 +4,12 @@ using UnityEngine;
 public class WeaponCoreHolder : MonoBehaviour
 {
     // Inspector でセットできるようにする場合
-    [SerializeField] private List<GameObject> weaponCoreList;
+    private List<GameObject> weaponCoreList;
 
     void Start()
     {
         // リストが null の場合は初期化
-        weaponCoreList ??= new List<GameObject>();
+        weaponCoreList = PlayerManager.Instance.GetPlayerWeaponCoresData();
     }
 
     public List<GameObject> GetWeaponCoreList(){
