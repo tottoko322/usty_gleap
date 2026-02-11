@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   playerGravesData: {fileID: 11400000, guid: a30418bfc19dde64f9894322194fcecb, type: 2}
+  playerWeaponCoresData: {fileID: 11400000, guid: 692bc0c56a35e34418d31f288a8a8b33, type: 2}
