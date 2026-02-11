@@ -903,10 +903,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 784465765187668276, guid: 9a0884c68b5eb7c4a873a3c8af0a80d8, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784465765187668276, guid: 9a0884c68b5eb7c4a873a3c8af0a80d8, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2541214235751769276, guid: 9a0884c68b5eb7c4a873a3c8af0a80d8, type: 3}
       propertyPath: m_Name
       value: PlazmaGrave
       objectReference: {fileID: 0}
+    - target: {fileID: 3092423030798216249, guid: 9a0884c68b5eb7c4a873a3c8af0a80d8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6007023802375530379, guid: df0b8d2fb54d8734d940173c97d6822e, type: 3}
     - target: {fileID: 6750278133461265563, guid: 9a0884c68b5eb7c4a873a3c8af0a80d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
