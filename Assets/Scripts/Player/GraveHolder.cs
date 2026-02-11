@@ -10,13 +10,6 @@ public class GraveHolder : MonoBehaviour
         graves = PlayerManager.Instance.GetPlayerGravesData();
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public List<GameObject> GetGraves(){
         return graves;
     }

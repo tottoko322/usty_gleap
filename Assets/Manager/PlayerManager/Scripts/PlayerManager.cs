@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
 
     void Awake()
     {
-            Debug.Log($"[PM] Awake {name} SO={playerGravesData}", this);
+        Debug.Log($"[PM] Awake {name} SO={playerGravesData}", this);
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

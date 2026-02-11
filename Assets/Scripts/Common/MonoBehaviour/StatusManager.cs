@@ -25,17 +25,14 @@ public class StatusManager : MonoBehaviour,IHasStatusManager,ICoroutineUpdatable
     void Start()
     {
         statusHolder = GetComponent<StatusHolder>();
-        //基本用
+        // 基本用
         baseStatus = statusHolder.GetBaseStatus;
         buffStatus = statusHolder.GetBuffStatus;
-        //バッファー用
+        // バッファー用
         temporaryBuffStatus = new BuffStatus(statusHolder.GetTemporaryBuffStatus);
         buffs = statusHolder.GetBuffs;
         effects = statusHolder.GetEffects;
-    }
-
-    void OnEnable()
-    {
+        // CoroutineManagerに登録
         CoroutineManager.Instance.Register(this);
     }
 
