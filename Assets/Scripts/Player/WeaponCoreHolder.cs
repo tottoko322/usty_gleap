@@ -6,7 +6,7 @@ public class WeaponCoreHolder : MonoBehaviour
     // Inspector でセットできるようにする場合
     private List<GameObject> weaponCoreList;
 
-    void Start()
+    void OnEnable()
     {
         // リストが null の場合は初期化
         weaponCoreList = PlayerManager.Instance.GetPlayerWeaponCoresData();
