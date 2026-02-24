@@ -7,6 +7,7 @@
 1. ディレクトリ構成
 1. PlayerManagerの実装（後で作る）
 1. 実行プロセスの集約化
+1. 必須コンポーネント自動追加（できればの範囲）
 ## コンセプト、ストーリー
 今回のゲームは、ダダサバイバーのような見下ろし方2Dアクションゲームをベースとして、一般的な死の概念を覆したゲームを作成する。具体的には、Playerの体力がなくなったらGAMEOVERではなく、Graveというお墓を生成してステージを進むという感じになる。  
 舞台は中世で、主人公は勇者である。
@@ -117,3 +118,19 @@ PlayerManagerをシーン上に配置し、Playerが自身の存在を登録・�
 
 ## 実行プロセスの集約化
 　おそらくフレームごとの実装にはUpdate、一定時間の間隔での実装にはCoroutineを使っているが、各クラスに定義すると並列で処理しなければならないのでオーバーヘッドが増えて、オブジェクトの数だけ負荷が増加する。そのために、UpdateとCoroutineを実行するのは一か所にして、繰り返し処理をしたいオブジェクトはそこに関数を登録する形で処理する。
+
+## 必須コンポーネント自動追加（できればの範囲）
+```csharp
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody))]// ←これで勝手につく
+public class PlayerController : MonoBehaviour
+{
+    private Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+}
+```
