@@ -19,6 +19,7 @@ public class PlayerAction : MonoBehaviour
         weaponCoreHolder = gameObject.GetComponent<WeaponCoreHolder>();
         weaponCoreList = weaponCoreHolder.GetWeaponCoreList();
         graveHolder = gameObject.GetComponent<GraveHolder>();
+        graves = graveHolder.GetGraves();
 
         // 攻撃用 InputAction(Button)
         fireAction = new InputAction(
@@ -81,7 +82,7 @@ public class PlayerAction : MonoBehaviour
         // クリックが押されたときだけ処理
         if (!context.performed) return;
         // 武器がなければ処理しない
-        if (weaponCoreList.Count == 0) return;
+        if (weaponCoreList == null || weaponCoreList.Count == 0) return;
 
         // マウス座標をスクリーン空間で取得
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
@@ -107,7 +108,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (isDestroyed) return;
         // 武器がなければ処理しない
-        if (weaponCoreList.Count == 0) return;
+        if (weaponCoreList == null || weaponCoreList.Count == 0) return;
         Vector2 scroll = context.ReadValue<Vector2>();
 
         if (scroll.y > 0)
@@ -131,13 +132,8 @@ public class PlayerAction : MonoBehaviour
         Debug.Log($"graveHolder: {graveHolder}, graves: {graves}");
         if (isDestroyed) return;
         if (!context.performed) return;
-        
         // graves と graveHolder が初期化されているか確認
-        if (graves == null)
-        {
-            graves = graveHolder.GetGraves();
-        }
-        
+        if (graves == null) return;
         if (graves.Count == 0)
         {
             DestroyMe();
