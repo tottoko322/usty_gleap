@@ -5,7 +5,7 @@ public class GraveHolder : MonoBehaviour
 {
     private List<GameObject> graves;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void OnEnable()
+    void Start()
     {
         graves = PlayerManager.Instance.GetPlayerGravesData();
     }
