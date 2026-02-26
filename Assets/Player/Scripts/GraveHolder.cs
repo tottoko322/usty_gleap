@@ -27,4 +27,9 @@ public class GraveHolder : MonoBehaviour
     {
         graves.Add(grave);
     }
+
+    public void DeleteAllGraves()
+    {
+        graves.Clear();
+    }
 }

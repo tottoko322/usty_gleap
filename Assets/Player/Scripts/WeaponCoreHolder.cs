@@ -20,4 +20,9 @@ public class WeaponCoreHolder : MonoBehaviour
     {
         weaponCoreList.Add(weaponCore);
     }
+
+    public void DeleteAllWeaponCores()
+    {
+        weaponCoreList.Clear();
+    }
 }
