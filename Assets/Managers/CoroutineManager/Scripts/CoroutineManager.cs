@@ -24,6 +24,7 @@ public class CoroutineManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     void OnEnable()

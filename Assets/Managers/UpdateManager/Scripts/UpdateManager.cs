@@ -21,6 +21,7 @@ public class UpdateManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
