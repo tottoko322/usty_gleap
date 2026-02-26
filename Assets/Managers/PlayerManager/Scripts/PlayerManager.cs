@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
 
     void Awake()
     {
+        ClearData();
         Debug.Log($"[PM] Awake {name} SO={playerGravesData}", this);
         if (Instance != null && Instance != this)
         {
@@ -47,5 +48,11 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> GetPlayerWeaponCoresData()
     {
         return playerWeaponCoresData.weaponCores;
+    }
+
+    public void ClearData()
+    {
+        playerGravesData.graves.Clear();
+        playerWeaponCoresData.weaponCores.Clear();
     }
 }
