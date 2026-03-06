@@ -16,5 +16,10 @@ public class HPBar : MonoBehaviour
         
         // MaxHPが0の場合は0を設定
         _hpSlider.value = maxHP > 0 ? currentHP / maxHP : 0;
+
+        // HPバーの向きを固定
+        transform.LookAt(Camera.main.transform);
+        transform.Rotate(0, 180, 0);
     }
+
 }
