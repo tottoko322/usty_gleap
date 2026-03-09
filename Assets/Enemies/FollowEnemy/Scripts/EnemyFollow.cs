@@ -1,32 +1,47 @@
 using UnityEngine;
 
+[RequireComponent(typeof(FollowEnemyAnimation))]
 public class EnemyFollow : MonoBehaviour
 {
   private Transform player; //playerのTransform
   public float speed = 4f; //敵の移動速度
   public float stopDistance = 1f;
-  private bool isGameOver = false;
+  private bool isMove = true;
+  private bool isDead = false;
+  private float pastHp = 11f;
   private StatusManager statusManager;
   private StatusActionHolder statusActionHolder;
+  private FollowEnemyAnimation animation;
   private GenerateGrave generateGrave;
-  private SelfStatusAction deathAction;
+  private TargetStatusAction attackAction;
   void Start()
   {
     statusManager = GetComponent<StatusManager>();
     generateGrave = GetComponent<GenerateGrave>();
     statusActionHolder = GetComponent<StatusActionHolder>();
-    deathAction = statusActionHolder.GetSelfStatusActionFromIndex(0);
-    player = GameObject.FindWithTag("Player").transform;
+    attackAction = statusActionHolder.GetTargetStatusActionFromIndex(0);
+    player = PlayerManager.Instance.CurrentPlayer;
+    animation = GetComponent<FollowEnemyAnimation>();
   }
 
   void Update()
   {
+    Move();
+    CheckHpAndDeath();
+    CheckHpAndHurt();
+  }
+
+  public void Move()
+  {
+    if(!isMove) return;
     speed = statusManager.GetSpeed();
-    if (player == null || isGameOver ){
+    if (player == null){
+      animation.Idle();
       if(PlayerManager.Instance == null || PlayerManager.Instance.CurrentPlayer == null) return;
       player = PlayerManager.Instance.CurrentPlayer;
       return;
     }
+    animation.Run();
 
     //playerの方向を取得
     Vector3 direction = (player.position - transform.position).normalized;
@@ -37,35 +52,52 @@ public class EnemyFollow : MonoBehaviour
       //方向に向かって移動
       transform.position += direction * speed * Time.deltaTime;
     }
+  }
 
-    //お墓の生成
-    // if (statusManager.BaseStatus.CurrentHP <= 0)
-    // {
-    //   generateGrave.Generate(transform.position);
-    // }
+  public void Attack(GameObject target)
+  {
+      animation.Attack();
+      attackAction.Execute(gameObject, target);
+      animation.Idle(); // 例えば待った後にIdleに戻す
+  }
 
-    //死の追加
-    deathAction.Execute(this.gameObject);
+  public void CheckHpAndDeath()
+  {
+    if(isDead) return;
+    float CurrentHP = statusManager.BaseStatus.CurrentHP;
+    if(CurrentHP <= 0)
+    {
+      isMove = false;
+      isDead = true;
+      animation.Death();
+      Destroy(this.gameObject, 2f);
+    }
+  }
+
+  public void CheckHpAndHurt()
+  {
+    Debug.Log(statusManager.BaseStatus.CurrentHP);
+    if(statusManager.BaseStatus.CurrentHP < pastHp)
+    {
+      Hurt();
+    }
+  }
+
+  public void Hurt()
+  {
+    isMove = false;
+    animation.Hurt();
+    pastHp = statusManager.BaseStatus.CurrentHP;
+    isMove = true;
   }
 
   void OnCollisionEnter2D(Collision2D collision)
   {
+    Debug.Log("ぶつかりました！");
     //プレイヤーとぶつかったら
-    if (collision.gameObject.CompareTag("Player") && false)
+    if (collision.gameObject == player.gameObject)
     {
-      Debug.Log("Game Over!");
-      isGameOver = true;
-
-      //プレイヤーの動きを止める
-      if (collision.gameObject.TryGetComponent<PlayerController>(out var playerScript))
-      {
-        playerScript.enabled = false;
-      }
-
-      // 敵の動きを止める
-      this.enabled = false;
+      Attack(collision.gameObject);
     }
-    float currentAttack = statusManager.GetAttackPower();
-    Debug.Log("敵の現在の攻撃力: "+currentAttack);
   }
 }
