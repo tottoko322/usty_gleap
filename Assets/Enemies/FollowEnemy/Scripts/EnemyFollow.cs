@@ -93,6 +93,11 @@ public class EnemyFollow : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D collision)
   {
+    if(PlayerManager.Instance == null || PlayerManager.Instance.CurrentPlayer == null)
+    {
+      player = PlayerManager.Instance.CurrentPlayer;
+      return;
+    }
     Debug.Log("ぶつかりました！");
     //プレイヤーとぶつかったら
     if (collision.gameObject == player.gameObject)

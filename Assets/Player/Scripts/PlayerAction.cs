@@ -29,7 +29,6 @@ public class PlayerAction : MonoBehaviour
         );
 
         fireAction.performed += OnFire;
-        fireAction.Enable();
 
         // スクロール用 InputAction(Value)
         scrollAction = new InputAction(
@@ -39,7 +38,6 @@ public class PlayerAction : MonoBehaviour
         );
 
         scrollAction.performed += OnScroll;
-        scrollAction.Enable();
 
         // スペースキー用 InputAction(Button)
         spaceAction = new InputAction(
@@ -49,41 +47,42 @@ public class PlayerAction : MonoBehaviour
         );
 
         spaceAction.performed += OnSpace;
+
+        fireAction.Enable();
+        scrollAction.Enable();
         spaceAction.Enable();
     }
     void OnDisable()
     {
-        if (fireAction != null)
-        {
-            fireAction.performed -= OnFire;
-            fireAction.Disable();
-            fireAction.Dispose();
-        }
+        fireAction.performed -= OnFire;
+        scrollAction.performed -= OnScroll;
+        spaceAction.performed -= OnSpace;
 
-        if (scrollAction != null)
-        {
-            scrollAction.performed -= OnScroll;
-            scrollAction.Disable();
-            scrollAction.Dispose();
-        }
-
-        if (spaceAction != null)
-        {
-            spaceAction.performed -= OnSpace;
-            spaceAction.Disable();
-            spaceAction.Dispose();
-        }
+        fireAction.Disable();
+        scrollAction.Disable();
+        spaceAction.Disable();
     }
 
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (isDestroyed) return;
+        if (isDestroyed)
+        {
+            Debug.Log("破壊されています");
+            return;
+        }
         // クリックが押されたときだけ処理
-        if (!context.performed) return;
+        if (!context.performed)
+        {
+            Debug.Log("クリックではありません");
+            return;
+        }
         // 武器がなければ処理しない
-        if (weaponCoreList == null || weaponCoreList.Count == 0) return;
-
+        if (weaponCoreList == null || weaponCoreList.Count == 0)
+        {
+            weaponCoreList = weaponCoreHolder.GetWeaponCoreList();
+        }
+        Debug.Log("クリックが動作します");
         // マウス座標をスクリーン空間で取得
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
 
@@ -106,9 +105,17 @@ public class PlayerAction : MonoBehaviour
 
     public void OnScroll(InputAction.CallbackContext context)
     {
-        if (isDestroyed) return;
+        if (isDestroyed)
+        {
+            Debug.Log("破壊されています");
+            return;
+        }
         // 武器がなければ処理しない
-        if (weaponCoreList == null || weaponCoreList.Count == 0) return;
+        if (weaponCoreList == null || weaponCoreList.Count == 0)
+        {
+            weaponCoreList = weaponCoreHolder.GetWeaponCoreList();
+        }
+        Debug.Log("スクロールが動作します");
         Vector2 scroll = context.ReadValue<Vector2>();
 
         if (scroll.y > 0)
@@ -130,10 +137,23 @@ public class PlayerAction : MonoBehaviour
     public void OnSpace(InputAction.CallbackContext context)
     {
         Debug.Log($"graveHolder: {graveHolder}, graves: {graves}");
-        if (isDestroyed) return;
-        if (!context.performed) return;
+        if (isDestroyed)
+        {
+            Debug.Log("破壊されています");
+            return;
+        }
+        if (!context.performed)
+        {
+            Debug.Log("スペースキーではありません");
+            return;
+        }
         // graves と graveHolder が初期化されているか確認
-        if (graves == null) return;
+        if (graves == null)
+        {
+            graves = graveHolder.GetGraves();
+        }
+        ;
+        Debug.Log("スペースが動作します");
         if (graves.Count == 0)
         {
             DestroyMe();
