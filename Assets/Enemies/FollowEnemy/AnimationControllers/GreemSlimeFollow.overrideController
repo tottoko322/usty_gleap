@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GreemSlimeFollow
+  m_Controller: {fileID: 9100000, guid: 1d5c9edda032554498516b5d7b12d21c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b2fb63247f8b37843b7efd43d94524ac, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: aa63eebefeb5cd94a8dca98b5c4d171d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e131da6ca04b26a46ae3aa447d226247, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0214cb6b6408d944990347b1b446731d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ec152e6838ac758469355f858512c4f8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6a1773ad3d8343349ad14dd0f484d699, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 02df7783ac6125242b11dea06700ca5b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cb777886b03e96545ba71cdf4085c66e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: da5c9613e894d704ca8911b7ea192f86, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b29148a7e9c15f0448000e47f06f76c8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 92e63331d9abcda44a66bfe659dc4f54, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1e3051ea429ffc24798e2d14ec767e99, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 59d2717879793f040b0071cf43845522, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6312f66d5cf05eb42886eb5cbac0bc6a, type: 2}
