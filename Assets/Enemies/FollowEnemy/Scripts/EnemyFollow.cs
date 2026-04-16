@@ -1,107 +1,128 @@
 using UnityEngine;
 
 [RequireComponent(typeof(FollowEnemyAnimation))]
-public class EnemyFollow : MonoBehaviour
+public class EnemyFollowController : MonoBehaviour
 {
-  private Transform player; //playerのTransform
-  public float speed = 4f; //敵の移動速度
-  public float stopDistance = 1f;
-  private bool isMove = true;
-  private bool isDead = false;
-  private float pastHp = 11f;
-  private StatusManager statusManager;
-  private StatusActionHolder statusActionHolder;
-  private FollowEnemyAnimation animation;
-  private GenerateGrave generateGrave;
-  private TargetStatusAction attackAction;
-  void Start()
-  {
-    statusManager = GetComponent<StatusManager>();
-    generateGrave = GetComponent<GenerateGrave>();
-    statusActionHolder = GetComponent<StatusActionHolder>();
-    attackAction = statusActionHolder.GetTargetStatusActionFromIndex(0);
-    player = PlayerManager.Instance.CurrentPlayer;
-    animation = GetComponent<FollowEnemyAnimation>();
-  }
+    private Transform player;
 
-  void Update()
-  {
-    Move();
-    CheckHpAndDeath();
-    CheckHpAndHurt();
-  }
+    public float speed = 4f;
+    public float stopDistance = 1f;
 
-  public void Move()
-  {
-    if(!isMove) return;
-    if(isDead) return;
-    speed = statusManager.GetSpeed();
-    if (player == null){
-      animation.Idle();
-      if(PlayerManager.Instance == null || PlayerManager.Instance.CurrentPlayer == null) return;
-      player = PlayerManager.Instance.CurrentPlayer;
-      return;
-    }
-    animation.Run();
+    private float pastHp = 11f;
 
-    //playerの方向を取得
-    Vector3 direction = (player.position - transform.position).normalized;
+    private StatusManager statusManager;
+    private StatusActionHolder statusActionHolder;
+    private FollowEnemyAnimation animation;
 
-    float distance = Vector3.Distance(player.position, transform.position);
+    // 状態管理
+    private IEnemyState currentState;
+    private EnemyIdleState idleState;
+    private EnemyMoveState moveState;
+    private EnemyHurtState hurtState;
+    private EnemyDeadState deadState;
+    private EnemyAttackState attackState;
 
-    if(distance > stopDistance){
-      //方向に向かって移動
-      transform.position += direction * speed * Time.deltaTime;
-    }
-  }
-
-  public void Attack(GameObject target)
-  {
-      animation.Attack();
-      attackAction.Execute(gameObject, target);
-      animation.Idle(); // 例えば待った後にIdleに戻す
-  }
-
-  public void CheckHpAndDeath()
-  {
-    if(isDead) return;
-    float CurrentHP = statusManager.BaseStatus.CurrentHP;
-    if(CurrentHP <= 0)
+    void Start()
     {
-      isMove = false;
-      isDead = true;
-      animation.Death();
-      Destroy(this.gameObject, 2f);
-    }
-  }
+        statusManager = GetComponent<StatusManager>();
+        statusActionHolder = GetComponent<StatusActionHolder>();
+        animation = GetComponent<FollowEnemyAnimation>();
+        player = PlayerManager.Instance.CurrentPlayer;
 
-  public void CheckHpAndHurt()
-  {
-    if(isDead) return;
-    Debug.Log(statusManager.BaseStatus.CurrentHP);
-    if(statusManager.BaseStatus.CurrentHP < pastHp)
+        // 各状態を初期化
+        InitializeStates();
+
+        // 初期状態を設定
+        ChangeState(idleState);
+    }
+
+    private void InitializeStates()
     {
-      Hurt();
+        idleState = new EnemyIdleState(this, animation);
+        moveState = new EnemyMoveState(this, statusManager, animation, transform, stopDistance);
+        hurtState = new EnemyHurtState(this, animation, statusManager);
+        deadState = new EnemyDeadState(animation, gameObject);
+        attackState = new EnemyAttackState(this, animation, statusActionHolder);
     }
-  }
 
-  public void Hurt()
-  {
-    isMove = false;
-    animation.Hurt();
-    pastHp = statusManager.BaseStatus.CurrentHP;
-    isMove = true;
-  }
+    void Update()
+    {
+        // 死亡状態なら何もしない
+        if (currentState is EnemyDeadState)
+        {
+            currentState.Update();
+            return;
+        }
 
-  void OnCollisionEnter2D(Collision2D collision)
-  {
-    if(!collision.gameObject.CompareTag("Player"))
-        return;
+        // 状態確認と遷移処理
+        CheckDeath();
+        CheckHurt();
+        CheckMove();
 
-    if(collision.gameObject == null)
-        return;
+        // 現在の状態の更新処理を実行
+        currentState.Update();
+    }
 
-    Debug.Log("ぶつかりました！");
-    Attack(collision.gameObject);
-  }
+    private void CheckMove()
+    {
+        // 移動可能かつ移動状態以外の場合、移動状態に遷移
+        if (!(currentState is EnemyMoveState) && 
+            !(currentState is EnemyDeadState) &&
+            !(currentState is EnemyAttackState))
+        {
+            ChangeState(moveState);
+        }
+    }
+
+    private void CheckDeath()
+    {
+        float currentHp = statusManager.BaseStatus.CurrentHP;
+
+        if (currentHp > 0) return;
+
+        ChangeState(deadState);
+    }
+
+    private void CheckHurt()
+    {
+        if (currentState is EnemyDeadState) return;
+
+        float currentHp = statusManager.BaseStatus.CurrentHP;
+
+        if (currentHp >= pastHp) return;
+
+        pastHp = currentHp;
+        ChangeState(hurtState);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Player")) return;
+
+        attackState.SetTargetObject(collision.gameObject);
+        ChangeState(attackState);
+    }
+
+    /// <summary>
+    /// 状態を変更する
+    /// </summary>
+    public void ChangeState(IEnemyState newState)
+    {
+        if (currentState != null)
+        {
+            currentState.Exit();
+        }
+
+        currentState = newState;
+        currentState.Enter();
+    }
+
+    /// <summary>
+    /// 外部から状態取得用（状態クラスから利用）
+    /// </summary>
+    public EnemyIdleState GetIdleState() => idleState;
+    public EnemyMoveState GetMoveState() => moveState;
+
+    public Transform GetPlayerTransform() => player;
+    public void SetPlayerTransform(Transform newPlayer) => player = newPlayer;
 }
