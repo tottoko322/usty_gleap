@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1287247015686621944}
   - component: {fileID: 230868669032183259}
   - component: {fileID: 3124690390612243247}
-  - component: {fileID: 7430443554644556598}
+  - component: {fileID: 823889822459979747}
   m_Layer: 0
   m_Name: BulletEnemy
   m_TagString: Enemy
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatusHolder
   baseStatusSO: {fileID: 11400000, guid: dae9a73df19141249be911988ee9d0d5, type: 2}
   buffStatusSO: {fileID: 11400000, guid: a63934fd4b7dfe245b6ce6f324a79c53, type: 2}
---- !u!114 &7430443554644556598
+--- !u!114 &823889822459979747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,11 +220,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4556183081519159654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c35f3c4aee6e240881324061e3a486, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e1e322345f358f40a08e6a8da0de40c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletEnemyController
-  stopDistance: 2
+  m_EditorClassIdentifier: Assembly-CSharp::BulletEnemyBehaviour
+  stopDistance: 1
   bulletPrefab: {fileID: 3782950914536683864, guid: b7c2a1d4e5f69788aabbccddeeff0011, type: 3}
   shotInterval: 1
-  fireDistance: 10
+  fireDistance: 5
   spawnOffset: 0.5
