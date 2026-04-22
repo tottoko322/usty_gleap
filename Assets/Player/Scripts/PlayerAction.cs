@@ -155,7 +155,6 @@ public class PlayerAction : MonoBehaviour
         {
             graves = graveHolder.GetGraves();
         }
-        ;
         Debug.Log("スペースが動作します");
         if (graves.Count == 0)
         {

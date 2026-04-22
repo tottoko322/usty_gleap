@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 6212091347092764909}
   - component: {fileID: 7363608004334717130}
   - component: {fileID: 5216692051697576548}
+  - component: {fileID: 972227135291899661}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -293,7 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863006a3f36487d4092ecd966afe3efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitBoxHolder
-  weaponCoreList: []
 --- !u!114 &7363608004334717130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,3 +318,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc4b4cf2b0bca84da4e27f7e201e115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLifecycle
+--- !u!114 &972227135291899661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582109014948741588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1865073b4d1ea2848a5474572f134b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::XBoxPlayerController

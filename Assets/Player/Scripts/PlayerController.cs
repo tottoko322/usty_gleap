@@ -41,4 +41,26 @@ public class PlayerController : MonoBehaviour, PlayerInputActions.IPlayerActions
         // 移動担当に処理を委譲
         if (playerMove != null) playerMove.TickMove();
     }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        // look処理
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        // attack処理
+    }
+
+    public void OnSelfDistruction(InputAction.CallbackContext context)
+    {
+        // self destruction処理
+    }
+
+    public void OnChangeWeapon(InputAction.CallbackContext context)
+    {
+        // weapon切り替え
+    }
+
+    public void OnChangeGrave(InputAction.CallbackContext context){}
 }
